@@ -63,7 +63,14 @@ public class Anggota implements Serializable {
     @OneToMany(mappedBy = "kdAnggota", fetch = FetchType.LAZY)
     private List<AnggotaPinjam> anggotaPinjamList;
 
-    public Anggota() {
+    public Anggota(String kdAnggota, String password, String namaAnggota, String telepon, String jenisKelamin, String alamat, Role kdRole) {
+        this.kdAnggota = kdAnggota;
+        this.password = password;
+        this.namaAnggota = namaAnggota;
+        this.telepon = telepon;
+        this.jenisKelamin = jenisKelamin;
+        this.alamat = alamat;
+        this.kdRole = kdRole;
     }
 
     public Anggota(String kdAnggota) {

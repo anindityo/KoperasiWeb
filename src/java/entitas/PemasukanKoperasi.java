@@ -42,6 +42,8 @@ public class PemasukanKoperasi implements Serializable {
     @Basic(optional = false)
     @Column(name = "KD_MASUKKOPERASI")
     private String kdMasukkoperasi;
+    @Column(name = "KD_PEMASUKAN")
+    private String kdPemasukan;
     @Column(name = "NAMA_SIMPANAN")
     private String namaSimpanan;
     @Column(name = "TGL_SIMPAN")
@@ -53,7 +55,13 @@ public class PemasukanKoperasi implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Simpanan kdSimpanan;
 
-    public PemasukanKoperasi() {
+    public PemasukanKoperasi(String kdMasukkoperasi, String kPemasukan, String namaSimpanan, Date tglSimpan, BigInteger nominal, Simpanan kdSimpanan) {
+        this.kdMasukkoperasi = kdMasukkoperasi;
+        this.kdPemasukan = kdPemasukan;
+        this.namaSimpanan = namaSimpanan;
+        this.tglSimpan = tglSimpan;
+        this.nominal = nominal;
+        this.kdSimpanan = kdSimpanan;
     }
 
     public PemasukanKoperasi(String kdMasukkoperasi) {

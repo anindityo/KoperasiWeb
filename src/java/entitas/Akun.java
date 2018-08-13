@@ -52,7 +52,11 @@ public class Akun implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Role kdRole;
 
-    public Akun() {
+    public Akun(String kdAkun, String password, String telepon, Role kdRole) {
+        this.kdAkun = kdAkun;
+        this.password = password;
+        this.telepon = telepon;
+        this.kdRole = kdRole;
     }
 
     public Akun(String kdAkun) {

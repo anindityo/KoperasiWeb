@@ -63,6 +63,14 @@ public class AnggotaPinjam implements Serializable {
 
     public AnggotaPinjam() {
     }
+    public AnggotaPinjam(String kdAnggotapinjam, Date tglPinjam, BigInteger nominalPinjam, Akun kdAkun, Anggota kdAnggota, Tenor kdTenor) {
+        this.kdAnggotapinjam = kdAnggotapinjam;
+        this.tglPinjam = tglPinjam;
+        this.nominalPinjam = nominalPinjam;
+        this.kdAkun = kdAkun;
+        this.kdAnggota = kdAnggota;
+        this.kdTenor = kdTenor;
+    }
 
     public AnggotaPinjam(String kdAnggotapinjam) {
         this.kdAnggotapinjam = kdAnggotapinjam;

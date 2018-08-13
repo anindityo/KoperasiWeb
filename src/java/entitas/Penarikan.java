@@ -39,7 +39,9 @@ public class Penarikan implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Anggota kdAnggota;
 
-    public Penarikan() {
+   public Penarikan(String kdPenarikan, Anggota kdAnggota) {
+        this.kdPenarikan = kdPenarikan;
+        this.kdAnggota = kdAnggota;
     }
 
     public Penarikan(String kdPenarikan) {

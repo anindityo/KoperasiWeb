@@ -45,7 +45,7 @@ public class AnggotaSimpan implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date tglSimpan;
     @Column(name = "NOMINAL")
-    private BigInteger nominal;
+    private Integer nominal;
     @JoinColumn(name = "KD_AKUN", referencedColumnName = "KD_AKUN")
     @ManyToOne(fetch = FetchType.LAZY)
     private Akun kdAkun;
@@ -57,6 +57,14 @@ public class AnggotaSimpan implements Serializable {
     private Simpanan kdSimpanan;
 
     public AnggotaSimpan() {
+    }
+    public AnggotaSimpan(String kdAnggotasimpan, Date tglSimpan, Integer nominal, Akun kdAkun, Anggota kdAnggota, Simpanan kdSimpanan) {
+        this.kdAnggotasimpan = kdAnggotasimpan;
+        this.tglSimpan = tglSimpan;
+        this.nominal = nominal;
+        this.kdAkun = kdAkun;
+        this.kdAnggota = kdAnggota;
+        this.kdSimpanan = kdSimpanan;
     }
 
     public AnggotaSimpan(String kdAnggotasimpan) {
@@ -79,11 +87,11 @@ public class AnggotaSimpan implements Serializable {
         this.tglSimpan = tglSimpan;
     }
 
-    public BigInteger getNominal() {
+    public Integer getNominal() {
         return nominal;
     }
 
-    public void setNominal(BigInteger nominal) {
+    public void setNominal(Integer nominal) {
         this.nominal = nominal;
     }
 
