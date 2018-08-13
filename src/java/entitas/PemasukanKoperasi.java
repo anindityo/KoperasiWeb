@@ -55,6 +55,11 @@ public class PemasukanKoperasi implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Simpanan kdSimpanan;
 
+    public PemasukanKoperasi() {
+    }
+
+    
+    
     public PemasukanKoperasi(String kdMasukkoperasi, String kPemasukan, String namaSimpanan, Date tglSimpan, BigInteger nominal, Simpanan kdSimpanan) {
         this.kdMasukkoperasi = kdMasukkoperasi;
         this.kdPemasukan = kdPemasukan;

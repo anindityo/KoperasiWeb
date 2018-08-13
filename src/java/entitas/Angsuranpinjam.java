@@ -53,6 +53,10 @@ public class Angsuranpinjam implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private AnggotaPinjam kdAnggotapinjam;
 
+    public Angsuranpinjam() {
+    }
+
+    
      public Angsuranpinjam(String kdAngsuran, Date tanggalAngsur, BigInteger jumlahAngsuran, String status, AnggotaPinjam kdAnggotapinjam) {
         this.kdAngsuran = kdAngsuran;
         this.tanggalAngsur = tanggalAngsur;

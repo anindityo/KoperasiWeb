@@ -51,5 +51,15 @@ Contributor(s):
     <property name="hibernate.connection.autocommit">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="entitas.Akun"/>
+    <mapping class="entitas.Anggota"/>
+    <mapping class="entitas.AnggotaPinjam"/>
+    <mapping class="entitas.AnggotaSimpan"/>
+    <mapping class="entitas.Angsuranpinjam"/>
+    <mapping class="entitas.PemasukanKoperasi"/>
+    <mapping class="entitas.Penarikan"/>
+    <mapping class="entitas.Role"/>
+    <mapping class="entitas.Simpanan"/>
+    <mapping class="entitas.Tenor"/>
   </session-factory>
 </hibernate-configuration>
