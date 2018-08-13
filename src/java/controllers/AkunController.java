@@ -34,6 +34,10 @@ public class AkunController {
     public List<Akun> getAll() {
         return this.convertToListAkun(this.adao.getAll());
     }
+    
+    public List<Akun> getAkunkaryawan() {
+        return this.convertToListAkun(this.adao.getAkunkaryawan());
+    }
 
     private List<Akun> convertToListAkun(List<Object> dataAwal) {
         List<Akun> dataAkun = new ArrayList<>();

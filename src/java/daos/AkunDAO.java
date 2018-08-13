@@ -32,6 +32,9 @@ public class AkunDAO {
         return this.fdao.get("FROM Akun");
     }
 
+    public List<Object> getAkunkaryawan() {
+        return this.fdao.get("FROM Akun where kd_role='2'");
+    }
    
     public List<Object> search(String category, String data) {
         return this.fdao.get("FROM Akun WHERE "
