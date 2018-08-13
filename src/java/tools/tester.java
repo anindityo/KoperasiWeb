@@ -22,5 +22,8 @@ public class tester {
             System.out.println(akun.getKdAkun()
                     +" - "+akun.getTelepon());
         }
+         
+       
+       
     }
 }
