@@ -40,12 +40,12 @@ public class TambahKaryawanServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
             if (ac.saveOrEdit(id, telepon, telepon, "2")) {
-              out.print("sukses");
+                out.print("sukses tambah");
             } else {
-             out.print("sukses");
+                out.print("gagal tambah");
             }
             response.sendRedirect("views/viewAdmin/adminkaryawan.jsp");
-                   }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

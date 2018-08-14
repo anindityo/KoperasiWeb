@@ -26,6 +26,9 @@ public class AkunDAO {
     public boolean insertOrUpdate(Akun akun) {
         return this.fdao.insertOrUpdate(akun);
     }
+    public boolean delete(String id){
+        return this.fdao.delete("delete from Akun where kd_akun='"+id+" ' ");
+    }
 
     
     public List<Object> getAll() {
@@ -42,8 +45,7 @@ public class AkunDAO {
     }
 
    
-    public Akun getAkunById(String kdAkun) {
-        return (Akun) this.fdao
-                .getById("FROM Akun WHERE kdAkun='" + kdAkun + "'");
+    public Object getAkunById(String kdAkun) {
+        return this.fdao.getById("FROM Akun WHERE kdAkun='" + kdAkun + "'");
     }
 }

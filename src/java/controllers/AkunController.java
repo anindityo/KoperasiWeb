@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controllers;
+
 import entitas.Akun;
 import org.hibernate.SessionFactory;
 import daos.AkunDAO;
@@ -16,25 +17,29 @@ import java.util.List;
  * @author WIN 10
  */
 public class AkunController {
+
     private AkunDAO adao;
-    
-    public AkunController(){
+
+    public AkunController() {
     }
-    
-    public AkunController(SessionFactory factory){
+
+    public AkunController(SessionFactory factory) {
         this.adao = new AkunDAO(factory);
     }
-    
+
     public boolean saveOrEdit(String kdAkun, String password,
             String telepon, String kdRole) {
         Akun akun = new Akun(kdAkun, password, telepon, new Role(Short.parseShort(kdRole)));
         return this.adao.insertOrUpdate(akun);
     }
+    public boolean drop(String id){
+        return this.adao.delete(id);
+    }
 
     public List<Akun> getAll() {
         return this.convertToListAkun(this.adao.getAll());
     }
-    
+
     public List<Akun> getAkunkaryawan() {
         return this.convertToListAkun(this.adao.getAkunkaryawan());
     }
@@ -51,9 +56,10 @@ public class AkunController {
     public List<Akun> search(String category, String data) {
         return this.convertToListAkun(this.adao.search(category, data));
     }
-    
-    public Akun getById(String kdAkun){
+
+    public Object getById(String kdAkun) {
         return this.adao.getAkunById(kdAkun);
-  }
+    }
     
+
 }

@@ -17,13 +17,13 @@ public class tester {
      //       System.out.println(HibernateUtil.getSessionFactory());
         AkunController ac = new AkunController(
                 HibernateUtil.getSessionFactory());
-       for (Akun akun : ac.getAll()) {
+    //  for (Akun akun : ac.getAll()) {
 //        for (Job job : jc.search("jobId", "AD")) {
-            System.out.println(akun.getKdAkun()
-                    +" - "+akun.getTelepon());
-        }
-         
-       
+  //          System.out.println(akun.getKdAkun()
+      //              +" - "+akun.getTelepon());
+      //  }
+      String del ="KRY2";
+          System.out.println(ac.drop(del));
        
     }
 }
