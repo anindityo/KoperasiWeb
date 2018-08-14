@@ -114,52 +114,22 @@
 
                 <div class="container-fluid">
 
-                    <!-- Icon Cards-->
-
-
-                    <!-- Area Chart Example-->
-
-                    <div class="table-responsive">
-                        <table id="example" class="table table-striped table-sm" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Kode Akun</th>
-                                    <th>Telepon</th>
-                                    <th>Fungsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tbody>
-                                <%                for (Akun akun : ac.getAkunkaryawan()) {
-                                %>
-                                <tr>
-
-                                    <td><%= akun.getKdAkun()%></td>
-                                    <td><%= akun.getTelepon()%></td>
-                                    <td>    <a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun() %>" role="button">Edit</a></td>
-                                  <!--
-                                    <td> <div class="container-login100-form-btn">
-                                            <a class="btn btn-success" href="?id<%=akun.getKdAkun()%>" data-toggle="modal"
-                                               data-target="#modaledit">Edit </a>
-
-                                        </div>
- </td>
--->
-                                    <%
-
-                                        }
-                                     
-                                    %>
-                                </tr>
-
-                            </tbody>
-
-                            </tbody>  
-
-                        </table>
-  <a class="btn btn-primary" href="tambahkaryawan.jsp" role="button">Tambah</a>
-                    </div>
-
+                 
+                    <%  AkunController  acl = new  AkunController(HibernateUtil.getSessionFactory());
+                       Akun akun = (Akun) session.getAttribute("id");
+            String id = session.getAttribute("id").toString();
+        %>
+                    
+                    
+                    <form action="addKaryawanServlet" method="GET">
+                        <label> Kode Karyawan</label>  
+                        <input type="text" value="" name="txtKode"> 
+                        <label> telepon </label>
+                        <input type="text" value="" name="txtTelepon">
+                          <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    
+                    
                     <!-- modal edit-->
                     <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

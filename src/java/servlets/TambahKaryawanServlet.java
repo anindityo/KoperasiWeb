@@ -13,14 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import tools.HibernateUtil;
 
 /**
  *
  * @author iqbael17
  */
-public class EditServlet extends HttpServlet {
+public class TambahKaryawanServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +33,21 @@ public class EditServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          String id = request.getParameter("id");
-        HttpSession session = request.getSession();
-        RequestDispatcher dispatcher;
-        AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            session.setAttribute("id", ac.getById(id));
-            dispatcher = request.getRequestDispatcher("views/editDepartment.jsp");
-            dispatcher.include(request, response);
 
-        }
+        String id = request.getParameter("txtkode");
+        String telepon = request.getParameter("txttelepon");
+        RequestDispatcher dispatcher = null;
+        try (PrintWriter out = response.getWriter()) {
+            AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+            if (ac.saveOrEdit(id, telepon, telepon, "2")) {
+              out.print("sukses");
+            } else {
+             out.print("sukses");
+            }
+            response.sendRedirect("views/viewAdmin/adminkaryawan.jsp");
+                   }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
