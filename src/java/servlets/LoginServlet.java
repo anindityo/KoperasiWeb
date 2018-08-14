@@ -10,20 +10,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.hibernate.Hibernate;
 import tools.HibernateUtil;
 
 /**
  *
  * @author iqbael17
  */
-@WebServlet(name = "AddKaryawanServlet", urlPatterns = {"/addKaryawanServlet"})
-public class AddKaryawanServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +34,27 @@ public class AddKaryawanServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String kodemasuk = request.getParameter("kode");
+        String password = request.getParameter("pass");
+        RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
-        RequestDispatcher requestDispatcher=null;
         try (PrintWriter out = response.getWriter()) {
-        requestDispatcher = request.getRequestDispatcher("views/viewAdmin/tambahkaryawan.jsp");
+            AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+            if (kodemasuk.equals("") || password.equals("")) {
+                out.print("login gagal");
+                response.sendRedirect("login.jsp");
+            } else if (!ac.login(kodemasuk, password)) {
+                out.print("login gagal");
+                response.sendRedirect("login.jsp");
+            } else if (ac.login(kodemasuk, password)) {
+                session.setAttribute("kode", kodemasuk);
+                response.sendRedirect("views/viewAdmin/index.jsp");
+            } else {
+                out.print("login gagal");
+                response.sendRedirect("login.jsp");
+            }
+
         }
     }
 

@@ -81,7 +81,7 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home.jsp">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fa fa-home"></i>
                         <span>Home</span>
                     </a>
@@ -133,7 +133,11 @@
                                 <tr>
 
                                     <td><%= akun.getKdAkun() %></td>
-                                    <td><%= akun.getTelepon() %></td>
+                                    <td><%
+                                        if(akun.getTelepon() !=null ){
+                                                   out.print(akun.getTelepon()); 
+                                                
+                                                }%></td>
                                     <td>    <a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Delete</a></td>
                                     <!--
                                       <td> <div class="container-login100-form-btn">
@@ -160,9 +164,8 @@
                                data-target="#modaltambah">Tambah </a>
 
                         </div>
-               
-                                
-                        <!-- modal edit-->
+               <% String kdkaryawan = ac.getAutoIdkaryawan(); %>
+                        <!-- modal tambaht-->
                         <div class="modal fade" id="modaltambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -179,16 +182,18 @@
                                             <div class="md-form mb-5">
                                                 <i class="fa fa-user prefix grey-text"></i>
                                                 <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Karyawan</label>
-                                                <input  type="text" id="orangeForm-name" class="form-control validate" name="txtkode">
+                                                <input readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdkaryawan%>" >
 
                                             </div>
-
-                                            <div class="md-form mb-5">
+                                                
+                                            <div class="md-form mb-5" >
                                                 <i class="fa fa-phone"></i>
                                                 <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
                                                 <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
 
                                             </div>
+                                                
+                                                
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button class="btn btn-deep-orange" type="submit">Tambah</button>

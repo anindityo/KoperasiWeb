@@ -36,7 +36,7 @@ public class TambahKaryawanServlet extends HttpServlet {
 
         String id = request.getParameter("txtkode");
         String telepon = request.getParameter("txttelepon");
-        RequestDispatcher dispatcher = null;
+  
         try (PrintWriter out = response.getWriter()) {
             AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
             if (ac.saveOrEdit(id, telepon, telepon, "2")) {

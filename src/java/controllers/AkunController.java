@@ -11,6 +11,7 @@ import daos.AkunDAO;
 import entitas.Role;
 import java.util.ArrayList;
 import java.util.List;
+import tools.BCrypt;
 
 /**
  *
@@ -25,6 +26,7 @@ public class AkunController {
 
     public AkunController(SessionFactory factory) {
         this.adao = new AkunDAO(factory);
+        
     }
 
     public boolean saveOrEdit(String kdAkun, String password,
@@ -35,7 +37,6 @@ public class AkunController {
     public boolean drop(String id){
         return this.adao.delete(id);
     }
-
     public List<Akun> getAll() {
         return this.convertToListAkun(this.adao.getAll());
     }
@@ -57,9 +58,17 @@ public class AkunController {
         return this.convertToListAkun(this.adao.search(category, data));
     }
 
-    public Object getById(String kdAkun) {
+    public Akun getById(String kdAkun) {
         return this.adao.getAkunById(kdAkun);
     }
-    
+    public String getAutoIdkaryawan(){
+        return this.adao.getAutoIdAkunKaryawan();
+    }
+       
+     public boolean login(String id, String password){
+        Akun um = (Akun) adao.getAkunById(id);
+        return BCrypt.checkpw(password, um.getPassword());
+    }
+       
 
 }

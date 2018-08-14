@@ -29,14 +29,14 @@ public class AkunDAO {
     public boolean delete(String id){
         return this.fdao.delete("delete from Akun where kd_akun='"+id+" ' ");
     }
-
+    
     
     public List<Object> getAll() {
         return this.fdao.get("FROM Akun");
     }
 
     public List<Object> getAkunkaryawan() {
-        return this.fdao.get("FROM Akun where kd_role='2'");
+        return this.fdao.get("FROM Akun where kd_role='2' order by kd_akun asc");
     }
    
     public List<Object> search(String category, String data) {
@@ -45,7 +45,15 @@ public class AkunDAO {
     }
 
    
-    public Object getAkunById(String kdAkun) {
-        return this.fdao.getById("FROM Akun WHERE kdAkun='" + kdAkun + "'");
+    public Akun getAkunById(String kdAkun) {
+        return (Akun)this.fdao.getById("FROM Akun WHERE kd_akun='" + kdAkun + "'");
     }
+    
+    public boolean getLogin(String kdAkun) {
+        return this.fdao.log("FROM Akun WHERE kd_akun='" + kdAkun + "'");
+    }
+    public String getAutoIdAkunKaryawan(){
+        return (String) this.fdao.getById("Select CONCAT('KRY',LPAD((TO_NUMBER(SUBSTR(MAX(kd_akun),4,3))+1),2, '0')) FROM Akun");
+    }
+    
 }

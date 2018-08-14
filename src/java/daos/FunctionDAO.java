@@ -25,6 +25,7 @@ public class FunctionDAO implements InterfaceDAO {
     public FunctionDAO(SessionFactory factory) {
         this.factory = factory;
     }
+
     public boolean insertOrUpdate(Object object) {
         boolean flag = false;
         try {
@@ -85,8 +86,43 @@ public class FunctionDAO implements InterfaceDAO {
         return data;
     }
 
-    public String getAutoId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object getAutoId(String query) {
+        Object data = new Object();
+        try {
+            this.session = this.factory.openSession();
+            this.transaction = this.session.beginTransaction();
+            data = this.session.createQuery(query)
+                    .uniqueResult();
+            this.transaction.commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        } finally {
+            this.session.close();
+        }
+        return data;
     }
 
+    @Override
+    public boolean log(String query) {
+         boolean flag = false;
+    try {
+            session = factory.getCurrentSession();
+            transaction = session.beginTransaction();
+            this.session.createQuery(query).uniqueResult();
+            
+            transaction.commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+//            session.close();
+        } 
+    return true;
+    }
 }

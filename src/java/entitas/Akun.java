@@ -55,6 +55,7 @@ public class Akun implements Serializable {
     public Akun() {
     }
 
+    
     public Akun(String kdAkun, String password, String telepon, Role kdRole) {
         this.kdAkun = kdAkun;
         this.password = password;

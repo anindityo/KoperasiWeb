@@ -40,7 +40,7 @@
 
     <body id="page-top">
         <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-
+           
         %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -115,7 +115,7 @@
 
                     <div class="isi">
                         
-                        <p>Selamat datang </p>
+                        <p>Selamat datang  </p>
                         
                     </div>
                          
