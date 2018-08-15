@@ -1,13 +1,9 @@
 <%-- 
-    Document   : admin
-    Created on : Aug 13, 2018, 3:31:23 PM
+    Document   : account
+    Created on : Aug 15, 2018, 4:25:41 PM
     Author     : Gusma
 --%>
 
-<%@page import="entitas.Akun"%>
-<%@page import="tools.HibernateUtil"%>
-<%@page import="org.hibernate.Hibernate"%>
-<%@page import="controllers.AkunController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Anggota - Dashboard</title>
+        <title>Anggota Account - Dashboard</title>
 
         <!-- Bootstrap core CSS-->
         <link href="../../styleAdmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,9 +33,6 @@
     </head>
 
     <body id="page-top">
-        <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-
-        %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
             <a class="navbar-brand mr-1" href="index.html">Anggota Page</a>
@@ -67,7 +60,7 @@
                         <i class="fas fa-user-circle fa-fw" style="font-size: 28px;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="account.jsp">Account</a>
+                        <a class="dropdown-item" href="account.jsp" data-toggle="modal" data-target="#">Account</a>
                         <a class="dropdown-item" href="../login.jsp" data-toggle="modal" data-target="#logoutModal">Logout</a>
                     </div>
                 </li>
@@ -103,7 +96,33 @@
             <!-- /modal edit-->
 
             <!-- DataTables Example -->
-            Selamat Datang !!
+            <form action="#" method="POST">
+
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class=" prefix grey-text"></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
+                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtkode">
+                        <i class=" prefix grey-text"></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Nama Anggota</label>
+                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtnama">                          
+                        <i class=" prefix grey-text"></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Password</label>
+                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtpassword">
+                        <i class=""></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
+                        <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                        <i class=""></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Jenis Kelamin</label>
+                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtjenisk">
+                        <i class=""></i>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Alamat</label>
+                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat">
+                        <br>
+                        <button class="btn btn-deep-orange" type="submit">Edit</button>
+                    </div>
+                </div>
+            </form>
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->

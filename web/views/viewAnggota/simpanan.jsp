@@ -1,15 +1,16 @@
 <%-- 
-    Document   : admin
-    Created on : Aug 13, 2018, 3:31:23 PM
+    Document   : anggotaview
+    Created on : Aug 15, 2018, 3:27:22 PM
     Author     : Gusma
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@page import="entitas.Akun"%>
 <%@page import="tools.HibernateUtil"%>
 <%@page import="org.hibernate.Hibernate"%>
 <%@page import="controllers.AkunController"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -37,9 +38,6 @@
     </head>
 
     <body id="page-top">
-        <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-
-        %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
             <a class="navbar-brand mr-1" href="index.html">Anggota Page</a>
@@ -98,12 +96,39 @@
                     </a>
                 </li>
             </ul>
+
+            <div id="content-wrapper">
+                <div class="container-fluid">
+                    <!-- Area Chart Example-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Data Table Simpanan
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Simpanan</th>
+                                            <th>Jenis Simpanan</th>
+                                            <th>Total Simpanan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody> 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
             <!-- modal tambah-->
 
             <!-- /modal edit-->
 
             <!-- DataTables Example -->
-            Selamat Datang !!
+
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
