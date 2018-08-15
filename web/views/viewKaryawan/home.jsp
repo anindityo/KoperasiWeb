@@ -17,7 +17,7 @@
         <meta name="keywords" content="au theme template">
 
         <!-- Title Page-->
-        <title>Dashboard</title>
+        <title>Karyawan - Dashboard</title>
 
         <!-- Fontfaces CSS-->
         <link href="../../styleKaryawan/css/font-face.css" rel="stylesheet" media="all">
@@ -170,7 +170,7 @@
                                 <div class="header-button">
                                     <div class="account-wrap">
                                         <div class="account-item clearfix js-item-menu">
-                                            <div class="content fa fa-user" style="font-size: 30px;">
+                                            <div class="content fa fa-user" style="font-size: 27px;">
                                                 <a class="js-acc-btn" href="#" style="font-size: 20px;"></a>
                                             </div>
                                             <div class="account-dropdown js-dropdown">

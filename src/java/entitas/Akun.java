@@ -62,6 +62,7 @@ public class Akun implements Serializable {
         this.kdRole = kdRole;
     }
 
+        
     public Akun(String kdAkun) {
         this.kdAkun = kdAkun;
     }

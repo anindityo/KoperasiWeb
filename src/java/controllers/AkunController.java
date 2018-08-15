@@ -11,6 +11,7 @@ import daos.AkunDAO;
 import entitas.Role;
 import java.util.ArrayList;
 import java.util.List;
+import method.BCrypt;
 
 /**
  *
@@ -61,5 +62,14 @@ public class AkunController {
         return this.adao.getAkunById(kdAkun);
     }
     
-
+    public boolean login(String kdAkun, String password){
+        Akun a = (Akun) adao.getAkunById(kdAkun);
+        return BCrypt.checkpw(password, a.getPassword());
+    }
+    
+    public boolean login(String category,String username, String password){
+        Akun a = (Akun) adao.search(category, username).get(0);
+        return BCrypt.checkpw(password, a.getPassword());
+    }
+    
 }

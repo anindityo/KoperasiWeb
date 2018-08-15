@@ -7,6 +7,7 @@ package tools;
 
 import controllers.AkunController;
 import entitas.Akun;
+import method.BCrypt;
 
 /**
  *
@@ -15,15 +16,16 @@ import entitas.Akun;
 public class tester {
     public static void main(String[] args) {
      //       System.out.println(HibernateUtil.getSessionFactory());
-        AkunController ac = new AkunController(
-                HibernateUtil.getSessionFactory());
+//        AkunController ac = new AkunController(
+//                HibernateUtil.getSessionFactory());
     //  for (Akun akun : ac.getAll()) {
 //        for (Job job : jc.search("jobId", "AD")) {
   //          System.out.println(akun.getKdAkun()
       //              +" - "+akun.getTelepon());
       //  }
-      String del ="KRY2";
-          System.out.println(ac.drop(del));
-       
+//      String del ="KRY2";
+//          System.out.println(ac.drop(del));
+        System.out.println(BCrypt.checkpw("qwerty", BCrypt.hashpw("qwerty", BCrypt.gensalt(12))));
+        System.out.println(BCrypt.hashpw("qwerty", BCrypt.gensalt(12)));
     }
 }

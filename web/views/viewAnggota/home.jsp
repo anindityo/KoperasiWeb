@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : admin
     Created on : Aug 13, 2018, 3:31:23 PM
@@ -22,7 +21,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Admin - Dashboard</title>
+        <title>Anggota - Dashboard</title>
 
         <!-- Bootstrap core CSS-->
         <link href="../../styleAdmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +43,7 @@
         %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-            <a class="navbar-brand mr-1" href="index.html">Admin Page</a>
+            <a class="navbar-brand mr-1" href="index.html">Anggota Page</a>
 
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                 <i class="fas fa-bars"></i>
@@ -53,12 +52,12 @@
             <!-- Navbar Search -->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
-                 
-                    <div class="input-group-append">
-                       
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <!--                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>-->
                 </div>
             </form>
 
@@ -66,11 +65,11 @@
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle fa-fw"></i>
+                        <i class="fas fa-user-circle fa-fw" style="font-size: 28px;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                        <a class="dropdown-item" href="#.jsp" data-toggle="modal" data-target="#">Account</a>
+                        <a class="dropdown-item" href="../login.jsp" data-toggle="modal" data-target="#logoutModal">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -88,52 +87,58 @@
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="adminkaryawan.jsp">
+                    <a class="nav-link" href="anggotaview.jsp">
                         <i class="fa fa-users"></i>
-                        <span>Karyawan</span>
+                        <span>Anggota</span>
                     </a>
-                </li>
-                <li class=" active nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Report</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-
-                        <a class="dropdown-item" href="#">Anggota Simpan</a>
-                        <a class="dropdown-item" href="#">Anggota Pinjam</a>
-                        <a class="dropdown-item" href="#">Angsuran Pinjam</a>
-                        <a class="dropdown-item" href="#">Penarikan</a>
-                        <a class="dropdown-item" href="#">Pemasukan Koperasi</a>
-                    </div>
                 </li>
             </ul>
 
             <div id="content-wrapper">
-
                 <div class="container-fluid">
-
-                    <div class="isi">
-                        
-                        <p>Selamat datang </p>
-                        
-                    </div>
-                         
-                         
-
-
-                    <footer class="sticky-footer">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright © Koperasi TIM 2018</span>
+                    <br>
+                    <!-- Area Chart Example-->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Data Table Anggota
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Akun</th>
+                                            <th>Telepon</th>
+                                            <th>Fungsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody> 
+                                </table>
                             </div>
                         </div>
-                    </footer>
-
-                </div>
-                <!-- /.content-wrapper -->
-
+                    </div>
+                </div>     
             </div>
+            <!-- modal tambah-->
+
+            <!-- /modal edit-->
+
+            <!-- DataTables Example -->
+
+            <!-- /.container-fluid -->
+
+            <!-- Sticky Footer -->
+            <!-- /.content-wrapper -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Koperasi TIM 2018</span>
+                    </div>
+                </div>
+            </footer>
+
             <!-- /#wrapper -->
 
             <!-- Scroll to Top Button-->
@@ -159,26 +164,25 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
+        <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
-            <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+        <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-            <!-- Page level plugin JavaScript-->
-            <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
-            <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
-            <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../../styleAdmin/js/sb-admin.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="../../styleAdmin/js/sb-admin.min.js"></script>
-
-            <!-- Demo scripts for this page-->
-            <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
-            <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+        <!-- Demo scripts for this page-->
+        <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
+        <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
 
     </body>
-
 </html>
