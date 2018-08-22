@@ -6,6 +6,8 @@
 package entitas;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,6 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Penarikan.findAll", query = "SELECT p FROM Penarikan p")
     , @NamedQuery(name = "Penarikan.findByKdPenarikan", query = "SELECT p FROM Penarikan p WHERE p.kdPenarikan = :kdPenarikan")})
 public class Penarikan implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "NOMINAL")
+    private BigInteger nominal;
+    @Column(name = "TANGGAL_PENARIKAN")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tanggalPenarikan;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -92,6 +103,22 @@ public class Penarikan implements Serializable {
     @Override
     public String toString() {
         return "entitas.Penarikan[ kdPenarikan=" + kdPenarikan + " ]";
+    }
+
+    public BigInteger getNominal() {
+        return nominal;
+    }
+
+    public void setNominal(BigInteger nominal) {
+        this.nominal = nominal;
+    }
+
+    public Date getTanggalPenarikan() {
+        return tanggalPenarikan;
+    }
+
+    public void setTanggalPenarikan(Date tanggalPenarikan) {
+        this.tanggalPenarikan = tanggalPenarikan;
     }
     
 }

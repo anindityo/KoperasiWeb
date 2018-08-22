@@ -41,5 +41,10 @@ public class AnggotaDAO {
         return (Anggota) this.fdao
                 .getById("FROM Anggota WHERE kdAnggota='" + kdAnggota + "'");
     }
+    public String getKdAutoAnggota(){
+            return (String) this.fdao.getById
+        ("Select CONCAT('AGT',LPAD((TO_NUMBER(SUBSTR(MAX(kd_anggota),4,3))+1),3, '0')) FROM Anggota");
+  
+    }
     
 }

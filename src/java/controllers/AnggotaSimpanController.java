@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controllers;
+
 import entitas.AnggotaSimpan;
 import org.hibernate.SessionFactory;
 import daos.AnggotaSimpanDAO;
@@ -12,31 +13,33 @@ import entitas.Anggota;
 import entitas.Simpanan;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 /**
  *
  * @author WIN 10
  */
 
-
 public class AnggotaSimpanController {
+
     private AnggotaSimpanDAO anggotasimpandao;
-    
-    public AnggotaSimpanController(){
+
+    public AnggotaSimpanController() {
     }
-    
-    public AnggotaSimpanController(SessionFactory factory){
+
+    public AnggotaSimpanController(SessionFactory factory) {
         this.anggotasimpandao = new AnggotaSimpanDAO(factory);
     }
-    
+
     public boolean saveOrEdit(String kdAnggotaSimpan,
-            String tglSimpan, String nominal, String kdAkun, String kdAnggota,
+            Date tglSimpan, String nominal, String kdAkun, String kdAnggota,
             String kdSimpanan) {
-        AnggotaSimpan anggotaSimpan = new AnggotaSimpan(kdAnggotaSimpan, 
-                java.sql.Date.valueOf(tglSimpan),
-                Integer.parseInt(nominal), 
-                new Akun(kdAkun), 
-                new Anggota(kdAnggota), 
+        AnggotaSimpan anggotaSimpan = new AnggotaSimpan(kdAnggotaSimpan,
+                tglSimpan,
+                Integer.parseInt(nominal),
+                new Akun(kdAkun),
+                new Anggota(kdAnggota),
                 new Simpanan(kdSimpanan));
         return this.anggotasimpandao.insertOrUpdate(anggotaSimpan);
     }
@@ -57,9 +60,12 @@ public class AnggotaSimpanController {
     public List<AnggotaSimpan> search(String category, String data) {
         return this.convertToListAnggotaSimpan(this.anggotasimpandao.search(category, data));
     }
-    
-    public AnggotaSimpan getById(String kdAnggotaSimpan){
+
+    public AnggotaSimpan getById(String kdAnggotaSimpan) {
         return this.anggotasimpandao.getAnggotaSimpanById(kdAnggotaSimpan);
-  }
-    
+    }
+     public String getAutoIdAnggotaSimpan(){
+        return this.anggotasimpandao.getKdAutoAnggotaSimpan();
+    }
+
 }

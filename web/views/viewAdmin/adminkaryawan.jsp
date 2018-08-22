@@ -15,6 +15,7 @@
 
     <head>
 
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,13 +35,17 @@
 
         <!-- Custom styles for this template-->
         <link href="../../styleAdmin/css/sb-admin.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.js">
     </head>
 
     <body id="page-top">
         <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+            Akun ak = (Akun) session.getAttribute("kd");
+            String id = session.getAttribute("kd").toString();
 
+            String karyawan = ac.getAutoIdkaryawan();
         %>
+
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
             <a class="navbar-brand mr-1" href="index.html">Admin Page</a>
@@ -52,12 +57,12 @@
             <!-- Navbar Search -->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
-<!--                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>-->
+                    <!--                    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>-->
                 </div>
             </form>
 
@@ -68,9 +73,8 @@
                         <i class="fas fa-user-circle fa-fw" style="font-size: 28px;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                         <a class="dropdown-item" href="#.jsp" data-toggle="modal" data-target="#">Account</a>
-                        <a class="dropdown-item" href="../login.jsp" data-toggle="modal" data-target="#logoutModal">Logout</a>
-                    </div>
+                        <a class="dropdown-item" href="#.jsp" data-toggle="modal" data-target="#">Account</a>
+                        <a class="btn btn-primary" href="../../logoutServlet">Logout</a>    </div>
                 </li>
             </ul>
 
@@ -81,7 +85,7 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="home.jsp">
                         <i class="fa fa-home"></i>
                         <span>Home</span>
                     </a>
@@ -110,122 +114,12 @@
 
             <div id="content-wrapper">
                 <div class="container-fluid">
-<<<<<<< HEAD
-
-                    <!-- Icon Cards-->
-
-
-                    <!-- Area Chart Example-->
-
-                    <div class="table-responsive">
-                        <table id="example" class="table table-striped table-sm" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Kode Akun</th>
-                                    <th>Telepon</th>
-                                    <th>Fungsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tbody>
-                                <%                for (Akun akun : ac.getAkunkaryawan()) {
-                                %>
-                                <tr>
-
-                                    <td><%= akun.getKdAkun() %></td>
-                                    <td><%
-                                        if(akun.getTelepon() !=null ){
-                                                   out.print(akun.getTelepon()); 
-                                                
-                                                }%></td>
-                                    <td>    <a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Delete</a></td>
-                                    <!--
-                                      <td> <div class="container-login100-form-btn">
-                                              <a class="btn btn-success" href="?id<%=akun.getKdAkun()%>" data-toggle="modal"
-                                                 data-target="#modaledit">Edit </a>
-  
-                                          </div>
-   </td>
-                                    -->
-                                    <%
-
-                                        }
-
-                                    %>
-                                </tr>
-
-                            </tbody>
-
-                            </tbody>  
-
-                        </table>
-                        <div class="container-login100-form-btn">
-                            <a class="btn btn-success" href="" data-toggle="modal"
-                               data-target="#modaltambah">Tambah </a>
-
-                        </div>
-               <% String kdkaryawan = ac.getAutoIdkaryawan(); %>
-                        <!-- modal tambaht-->
-                        <div class="modal fade" id="modaltambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-
-                                    <form action="../../tambahKaryawanServlet" method="POST">
-                                        <div class="modal-header text-center">
-                                            <h4 class="modal-title w-100 font-weight-bold">Tambah Data</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body mx-3">
-
-                                            <div class="md-form mb-5">
-                                                <i class="fa fa-user prefix grey-text"></i>
-                                                <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Karyawan</label>
-                                                <input readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdkaryawan%>" >
-
-                                            </div>
-                                                
-                                            <div class="md-form mb-5" >
-                                                <i class="fa fa-phone"></i>
-                                                <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                                <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
-
-                                            </div>
-                                                
-                                                
-                                        </div>
-                                        <div class="modal-footer d-flex justify-content-center">
-                                            <button class="btn btn-deep-orange" type="submit">Tambah</button>
-                                        </div>
-                                </div>
-                                </form>
-
-                            </div>
-                        </div>
-
-                        <!-- /modal edit-->
-
-                        <!-- DataTables Example -->
-
-                        <!-- /.container-fluid -->
-
-                        <!-- Sticky Footer -->
-                        <footer class="sticky-footer">
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                    <span>Copyright © Koperasi TIM 2018</span>
-                                </div>
-                            </div>
-                        </footer>
-
-=======
                     <div class="container-login100-form-btn">
                         <a class="btn btn-success" href="" data-toggle="modal"
                            data-target="#modaltambah">Tambah </a>
->>>>>>> origin/master
+                        <a class="btn btn-primary" href=""> Print</a>
                     </div>
-                    <br>
+                    </br>
                     <!-- Area Chart Example-->
                     <div class="card mb-3">
                         <div class="card-header">
@@ -233,28 +127,34 @@
                             Data Table Karyawan
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Kode Akun</th>
-                                            <th>Telepon</th>
-                                            <th>Fungsi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (Akun akun : ac.getAkunkaryawan()) {
+
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Kode Akun</th>
+                                        <th>Telepon</th>
+                                        <th>Tanggal lahir</th>
+                                        <th>Fungsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (Akun akun : ac.getAkunkaryawan()) {
+                                    %>
+                                    <tr>
+                                        <td><%= akun.getKdAkun()%></td>
+                                        <td><%
+                                            if (akun.getTelepon() != null) {
+                                                out.print(akun.getTelepon());
+                                            }
+                                            %></td>
+                                        <td><%= akun.getTanggallahir()%></td>
+                                        <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Delete</a></td>
+                                        <% }
                                         %>
-                                        <tr>
-                                            <td><%= akun.getKdAkun()%></td>
-                                            <td><%= akun.getTelepon()%></td>
-                                            <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Edit</a></td>
-                                            <% }
-                                            %>
-                                        </tr>
-                                    </tbody> 
-                                </table>
-                            </div>
+                                    </tr>
+                                </tbody> 
+                            </table>
+
                         </div>
                     </div>
                 </div>     
@@ -274,12 +174,17 @@
                                 <div class="md-form mb-5">
                                     <i class="fa fa-user prefix grey-text"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Karyawan</label>
-                                    <input  type="text" id="orangeForm-name" class="form-control validate" name="txtkode">
+                                    <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%=karyawan%> ">
                                 </div>
                                 <div class="md-form mb-5">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
                                     <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                                </div>
+                                <div class="md-form mb-5">
+                                    <i class="date"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl">
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
@@ -350,6 +255,7 @@
         <!-- Demo scripts for this page-->
         <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
         <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+
 
     </body>
 </html>

@@ -10,12 +10,12 @@ import org.hibernate.SessionFactory;
 import daos.AkunDAO;
 import entitas.Role;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-<<<<<<< HEAD
+
 import tools.BCrypt;
-=======
-import method.BCrypt;
->>>>>>> origin/master
+
+
 
 /**
  *
@@ -34,8 +34,9 @@ public class AkunController {
     }
 
     public boolean saveOrEdit(String kdAkun, String password,
-            String telepon, String kdRole) {
-        Akun akun = new Akun(kdAkun, password, telepon, new Role(Short.parseShort(kdRole)));
+            String telepon, String kdRole, Date tanggallahir) {
+        Akun akun = new Akun(kdAkun, BCrypt.hashpw(password, BCrypt.gensalt(12)),
+                telepon, new Role(Short.parseShort(kdRole)),tanggallahir);
         return this.adao.insertOrUpdate(akun);
     }
     public boolean drop(String id){
@@ -65,8 +66,8 @@ public class AkunController {
     public Akun getById(String kdAkun) {
         return this.adao.getAkunById(kdAkun);
     }
-<<<<<<< HEAD
-    public String getAutoIdkaryawan(){
+    
+    public String getAutoIdkaryawan() {
         return this.adao.getAutoIdAkunKaryawan();
     }
        
@@ -74,19 +75,13 @@ public class AkunController {
         Akun um = (Akun) adao.getAkunById(id);
         return BCrypt.checkpw(password, um.getPassword());
     }
-       
+   
 
-=======
-    
-    public boolean login(String kdAkun, String password){
-        Akun a = (Akun) adao.getAkunById(kdAkun);
-        return BCrypt.checkpw(password, a.getPassword());
-    }
+   
     
     public boolean login(String category,String username, String password){
         Akun a = (Akun) adao.search(category, username).get(0);
         return BCrypt.checkpw(password, a.getPassword());
     }
     
->>>>>>> origin/master
 }

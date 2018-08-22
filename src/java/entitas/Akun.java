@@ -6,6 +6,7 @@
 package entitas;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,6 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Akun.findByPassword", query = "SELECT a FROM Akun a WHERE a.password = :password")
     , @NamedQuery(name = "Akun.findByTelepon", query = "SELECT a FROM Akun a WHERE a.telepon = :telepon")})
 public class Akun implements Serializable {
+
+    @Column(name = "TANGGALLAHIR")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tanggallahir;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,13 +62,16 @@ public class Akun implements Serializable {
     public Akun() {
     }
 
-    
-    public Akun(String kdAkun, String password, String telepon, Role kdRole) {
+    public Akun(String kdAkun, String password, String telepon, Role kdRole, Date tanggallahir) {
+  
         this.kdAkun = kdAkun;
         this.password = password;
         this.telepon = telepon;
         this.kdRole = kdRole;
+        this.tanggallahir = tanggallahir;
     }
+
+    
 
         
     public Akun(String kdAkun) {
@@ -141,6 +151,14 @@ public class Akun implements Serializable {
     @Override
     public String toString() {
         return "entitas.Akun[ kdAkun=" + kdAkun + " ]";
+    }
+
+    public Date getTanggallahir() {
+        return tanggallahir;
+    }
+
+    public void setTanggallahir(Date tanggallahir) {
+        this.tanggallahir = tanggallahir;
     }
     
 }

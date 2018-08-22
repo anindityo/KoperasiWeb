@@ -3,7 +3,6 @@
   <persistence-unit name="KoperasiWebPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entitas.Simpanan</class>
-    <class>entitas.PemasukanKoperasi</class>
     <class>entitas.Angsuranpinjam</class>
     <class>entitas.Penarikan</class>
     <class>entitas.AnggotaSimpan</class>
@@ -12,6 +11,7 @@
     <class>entitas.Anggota</class>
     <class>entitas.Tenor</class>
     <class>entitas.Akun</class>
+    <class>entitas.PemasukanKoperasi</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>

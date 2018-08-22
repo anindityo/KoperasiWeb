@@ -53,7 +53,7 @@ public class AkunDAO {
         return this.fdao.log("FROM Akun WHERE kd_akun='" + kdAkun + "'");
     }
     public String getAutoIdAkunKaryawan(){
-        return (String) this.fdao.getById("Select CONCAT('KRY',LPAD((TO_NUMBER(SUBSTR(MAX(kd_akun),4,3))+1),2, '0')) FROM Akun");
+        return (String) this.fdao.getById("Select CONCAT('KRY',LPAD((TO_NUMBER(SUBSTR(MAX(kd_akun),4,3))+1),3, '0')) FROM Akun");
     }
     
 }

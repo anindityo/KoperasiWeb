@@ -6,6 +6,7 @@
 package entitas;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,6 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Anggota.findByJenisKelamin", query = "SELECT a FROM Anggota a WHERE a.jenisKelamin = :jenisKelamin")
     , @NamedQuery(name = "Anggota.findByAlamat", query = "SELECT a FROM Anggota a WHERE a.alamat = :alamat")})
 public class Anggota implements Serializable {
+
+    @Column(name = "TANGGALLAHIR")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tanggallahir;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,8 +73,8 @@ public class Anggota implements Serializable {
     public Anggota() {
     }
 
-    
-    public Anggota(String kdAnggota, String password, String namaAnggota, String telepon, String jenisKelamin, String alamat, Role kdRole) {
+    public Anggota( String kdAnggota, String password, String namaAnggota, String telepon, String jenisKelamin, String alamat, Role kdRole, Date tanggallahir) {
+     
         this.kdAnggota = kdAnggota;
         this.password = password;
         this.namaAnggota = namaAnggota;
@@ -75,7 +82,10 @@ public class Anggota implements Serializable {
         this.jenisKelamin = jenisKelamin;
         this.alamat = alamat;
         this.kdRole = kdRole;
+       this.tanggallahir = tanggallahir;
     }
+
+    
 
     public Anggota(String kdAnggota) {
         this.kdAnggota = kdAnggota;
@@ -187,6 +197,14 @@ public class Anggota implements Serializable {
     @Override
     public String toString() {
         return "entitas.Anggota[ kdAnggota=" + kdAnggota + " ]";
+    }
+
+    public Date getTanggallahir() {
+        return tanggallahir;
+    }
+
+    public void setTanggallahir(Date tanggallahir) {
+        this.tanggallahir = tanggallahir;
     }
     
 }

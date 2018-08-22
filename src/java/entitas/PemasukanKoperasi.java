@@ -6,12 +6,10 @@
 package entitas;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author iqbael17
+ * @author iqbal yusuff
  */
 @Entity
 @Table(name = "PEMASUKAN_KOPERASI")
@@ -42,27 +40,22 @@ public class PemasukanKoperasi implements Serializable {
     @Basic(optional = false)
     @Column(name = "KD_MASUKKOPERASI")
     private String kdMasukkoperasi;
-    @Column(name = "KD_PEMASUKAN")
-    private String kdPemasukan;
     @Column(name = "NAMA_SIMPANAN")
     private String namaSimpanan;
     @Column(name = "TGL_SIMPAN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tglSimpan;
     @Column(name = "NOMINAL")
-    private BigInteger nominal;
+    private Integer nominal;
     @JoinColumn(name = "KD_SIMPANAN", referencedColumnName = "KD_SIMPANAN")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Simpanan kdSimpanan;
 
     public PemasukanKoperasi() {
     }
 
-    
-    
-    public PemasukanKoperasi(String kdMasukkoperasi, String kPemasukan, String namaSimpanan, Date tglSimpan, BigInteger nominal, Simpanan kdSimpanan) {
+    public PemasukanKoperasi(String kdMasukkoperasi, String namaSimpanan, Date tglSimpan, Integer nominal, Simpanan kdSimpanan) {
         this.kdMasukkoperasi = kdMasukkoperasi;
-        this.kdPemasukan = kdPemasukan;
         this.namaSimpanan = namaSimpanan;
         this.tglSimpan = tglSimpan;
         this.nominal = nominal;
@@ -97,11 +90,11 @@ public class PemasukanKoperasi implements Serializable {
         this.tglSimpan = tglSimpan;
     }
 
-    public BigInteger getNominal() {
+    public Integer getNominal() {
         return nominal;
     }
 
-    public void setNominal(BigInteger nominal) {
+    public void setNominal(Integer nominal) {
         this.nominal = nominal;
     }
 

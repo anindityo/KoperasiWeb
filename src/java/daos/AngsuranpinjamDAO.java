@@ -39,5 +39,10 @@ public class AngsuranpinjamDAO {
         return (Angsuranpinjam) this.fdao
                 .getById("FROM Angsuran WHERE kdAngsuran='" + kdAngsuran + "'");
     }
+    public String getKdAutoAnggotaPinjam(){
+            return (String) this.fdao.getById("Select CONCAT('APJ',LPAD((TO_NUMBER(SUBSTR(MAX(kd_anggotapinjam),4,3))+1),3, '0')) FROM AnggotaPinjam");
+  
+    }
+    
 
 }

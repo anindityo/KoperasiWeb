@@ -86,6 +86,23 @@ public class FunctionDAO implements InterfaceDAO {
         return data;
     }
 
+      public Object getAllone(String query) {
+        Object data = new Object();
+        try {
+            this.session = this.factory.openSession();
+            this.transaction = this.session.beginTransaction();
+            data = this.session.createQuery(query);
+            this.transaction.commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+        } finally {
+            this.session.close();
+        }
+        return data;
+    }
     public Object getAutoId(String query) {
         Object data = new Object();
         try {

@@ -6,6 +6,9 @@
 package servlets;
 
 import controllers.AkunController;
+import controllers.AnggotaController;
+import entitas.Akun;
+import entitas.Anggota;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,11 +17,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Hibernate;
 import tools.HibernateUtil;
 
 /**
  *
- * @author iqbael17
+ * @author iqbal yusuff
  */
 public class LoginServlet extends HttpServlet {
 
@@ -34,25 +38,41 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String kodemasuk = request.getParameter("kode");
-        String password = request.getParameter("pass");
-        RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
+        RequestDispatcher dispatcher = null;
+        String kodelogin = request.getParameter("kode");
+        String pass = request.getParameter("pass");
+        String role= request.getParameter("cmblogin");
+        AnggotaController agtc = new AnggotaController(HibernateUtil.getSessionFactory());
+        AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
+      
         try (PrintWriter out = response.getWriter()) {
-            AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-            if (kodemasuk.equals("") || password.equals("")) {
-                out.print("login gagal");
-                response.sendRedirect("login.jsp");
-            } else if (!ac.login(kodemasuk, password)) {
-                out.print("login gagal");
-                response.sendRedirect("login.jsp");
-            } else if (ac.login(kodemasuk, password)) {
-                session.setAttribute("kode", kodemasuk);
-                response.sendRedirect("views/viewAdmin/index.jsp");
+
+            Anggota agt = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(kodelogin);
+
+            if (role.equals(role)) {
+                Akun a = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(kodelogin);
+
+                if (ak.search("kd_akun", kodelogin).isEmpty() || !ak.login(kodelogin, pass)) {
+                    response.sendRedirect("login.jsp");
+                } else {
+                    if (a.getKdRole().getKdRole().toString().equals("1")) {
+                        response.sendRedirect("views/viewAdmin/home.jsp");
+                        session.setAttribute("kd", kodelogin);
+                    } else if (a.getKdRole().getKdRole().toString().equals("2")) {
+                        response.sendRedirect("views/viewKaryawan/home.jsp");
+                        session.setAttribute("kd", kodelogin);
+                    } else {
+                        System.out.println("gagal");
+                    }
+
+                }
             } else {
-                out.print("login gagal");
-                response.sendRedirect("login.jsp");
+                if (agtc.search("kd_anggota", kodelogin).isEmpty() || !agtc.loginanggota(kodelogin, pass)) {
+                    response.sendRedirect("login.jsp");
+                } else {
+                    response.sendRedirect("views/viewAnggota/home.jsp");
+                }
             }
 
         }

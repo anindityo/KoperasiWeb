@@ -8,6 +8,12 @@ package servlets;
 import controllers.AkunController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,15 +42,22 @@ public class TambahKaryawanServlet extends HttpServlet {
 
         String id = request.getParameter("txtkode");
         String telepon = request.getParameter("txttelepon");
-  
+        String tgl = request.getParameter("txttgl");
+        RequestDispatcher requestDispatcher = null;
         try (PrintWriter out = response.getWriter()) {
+            DateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
+            Date tanggalL = formatTanggal.parse(tgl);
             AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-            if (ac.saveOrEdit(id, telepon, telepon, "2")) {
+            if (ac.saveOrEdit(id, tgl, telepon, "2", tanggalL)) {
                 out.print("sukses tambah");
             } else {
                 out.print("gagal tambah");
             }
             response.sendRedirect("views/viewAdmin/adminkaryawan.jsp");
+            // requestDispatcher = request.getRequestDispatcher("views/viewAdmin/tambahkaryawan.jsp");
+
+        } catch (ParseException ex) {
+            Logger.getLogger(TambahKaryawanServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

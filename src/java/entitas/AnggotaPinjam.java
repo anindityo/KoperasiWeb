@@ -48,7 +48,7 @@ public class AnggotaPinjam implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date tglPinjam;
     @Column(name = "NOMINAL_PINJAM")
-    private BigInteger nominalPinjam;
+    private Integer nominalPinjam;
     @OneToMany(mappedBy = "kdAnggotapinjam", fetch = FetchType.LAZY)
     private List<Angsuranpinjam> angsuranpinjamList;
     @JoinColumn(name = "KD_AKUN", referencedColumnName = "KD_AKUN")
@@ -63,9 +63,17 @@ public class AnggotaPinjam implements Serializable {
 
     public AnggotaPinjam() {
     }
-    public AnggotaPinjam(String kdAnggotapinjam, Date tglPinjam, BigInteger nominalPinjam, Akun kdAkun, Anggota kdAnggota, Tenor kdTenor) {
+    public AnggotaPinjam(String kdAnggotapinjam, Date tglPinjam, Integer nominalPinjam, Akun kdAkun, Anggota kdAnggota, Tenor kdTenor) {
         this.kdAnggotapinjam = kdAnggotapinjam;
         this.tglPinjam = tglPinjam;
+        this.nominalPinjam = nominalPinjam;
+        this.kdAkun = kdAkun;
+        this.kdAnggota = kdAnggota;
+        this.kdTenor = kdTenor;
+    }
+
+    public AnggotaPinjam(String kdAnggotapinjam, Integer nominalPinjam, Akun kdAkun, Anggota kdAnggota, Tenor kdTenor) {
+        this.kdAnggotapinjam = kdAnggotapinjam;
         this.nominalPinjam = nominalPinjam;
         this.kdAkun = kdAkun;
         this.kdAnggota = kdAnggota;
@@ -92,11 +100,11 @@ public class AnggotaPinjam implements Serializable {
         this.tglPinjam = tglPinjam;
     }
 
-    public BigInteger getNominalPinjam() {
+    public Integer getNominalPinjam() {
         return nominalPinjam;
     }
 
-    public void setNominalPinjam(BigInteger nominalPinjam) {
+    public void setNominalPinjam(Integer nominalPinjam) {
         this.nominalPinjam = nominalPinjam;
     }
 

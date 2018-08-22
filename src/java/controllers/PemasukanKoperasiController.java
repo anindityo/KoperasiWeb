@@ -10,6 +10,7 @@ import daos.PemasukanKoperasiDAO;
 import entitas.Simpanan;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,12 +28,9 @@ public class PemasukanKoperasiController {
     }
     
     public boolean saveOrEdit(String kdMasukKoperasi, String namaSimpanan,
-            String tglSimpan, BigInteger nominal, String kdSimpanan){
-        PemasukanKoperasi pemasukanKoperasi = new PemasukanKoperasi(kdMasukKoperasi, 
-        kdSimpanan, namaSimpanan, 
-                java.sql.Date.valueOf(tglSimpan), 
-               nominal, 
-                new Simpanan(kdSimpanan));
+            Date tglSimpan, String nominal, String kdSimpanan){
+        PemasukanKoperasi pemasukanKoperasi = new PemasukanKoperasi(kdMasukKoperasi,namaSimpanan,tglSimpan,Integer.parseInt(nominal)
+        ,new Simpanan(kdSimpanan));
         return this.pemasukandao.insertOrUpdate(pemasukanKoperasi);
     }
 
@@ -56,6 +54,8 @@ public class PemasukanKoperasiController {
     public PemasukanKoperasi getById(String kdPemasukan){
         return this.pemasukandao.getPemasukanById(kdPemasukan);
   }
-    
+        public String getAutoIdPemasukanKoperasi(){
+        return this.pemasukandao.getKdAutoPemasukanKoeparasi();
+    }
     
 }

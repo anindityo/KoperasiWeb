@@ -1,36 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>EditIsiKaryawanAdminServlet</servlet-name>
-        <servlet-class>servlets.EditIsiKaryawanAdminServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditIdKaryawanServlet</servlet-name>
-        <servlet-class>servlets.EditIdKaryawanServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>TambahKaryawanServlet</servlet-name>
         <servlet-class>servlets.TambahKaryawanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TambahAnggotaServlet</servlet-name>
+        <servlet-class>servlets.TambahAnggotaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TambahAnggotaSimpanServlet</servlet-name>
+        <servlet-class>servlets.TambahAnggotaSimpanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TambahPemasukanKoperasiServlet</servlet-name>
+        <servlet-class>servlets.TambahPemasukanKoperasiServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>EditIsiKaryawanAdminServlet</servlet-name>
-        <url-pattern>/editIsiKaryawanAdminServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditIdKaryawanServlet</servlet-name>
-        <url-pattern>/editIdKaryawanServlet</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>TambahPinjamanServlet</servlet-name>
+        <servlet-class>servlets.TambahPinjamanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAdminServlet</servlet-name>
+        <servlet-class>servlets.EditAdminServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TambahKaryawanServlet</servlet-name>
         <url-pattern>/tambahKaryawanServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>TambahAnggotaServlet</servlet-name>
+        <url-pattern>/tambahAnggotaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TambahAnggotaSimpanServlet</servlet-name>
+        <url-pattern>/tambahAnggotaSimpanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TambahPemasukanKoperasiServlet</servlet-name>
+        <url-pattern>/tambahPemasukanKoperasiServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TambahPinjamanServlet</servlet-name>
+        <url-pattern>/tambahPinjamanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAdminServlet</servlet-name>
+        <url-pattern>/editAdminServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

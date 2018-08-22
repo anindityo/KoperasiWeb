@@ -28,12 +28,12 @@ public class AnggotaSimpanDAO {
 
     
     public List<Object> getAll() {
-        return this.fdao.get("FROM Anggota_Simpan");
+        return this.fdao.get("FROM AnggotaSimpan");
     }
 
    
     public List<Object> search(String category, String data) {
-        return this.fdao.get("FROM Anggota_Simpan WHERE "
+        return this.fdao.get("FROM AnggotaSimpan WHERE "
                 +category+ " LIKE '%"+data+"%'");
     }
 
@@ -42,5 +42,10 @@ public class AnggotaSimpanDAO {
         return (AnggotaSimpan) this.fdao
                 .getById("FROM AnggotaSimpan WHERE kdAnggotaSimpan='" + kdAnggotaSimpan + "'");
     }
+    public String getKdAutoAnggotaSimpan(){
+            return (String) this.fdao.getById("Select CONCAT('ASP',LPAD((TO_NUMBER(SUBSTR(MAX(kd_anggotasimpan),4,3))+1),3, '0')) FROM AnggotaSimpan");
+  
+    }
+    
     
 }

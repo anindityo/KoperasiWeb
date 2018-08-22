@@ -28,19 +28,24 @@ public class PemasukanKoperasiDAO {
 
     
     public List<Object> getAll() {
-        return this.fdao.get("FROM Pemasukan_Koperasi");
+        return this.fdao.get("FROM PemasukanKoperasi");
     }
 
    
     public List<Object> search(String category, String data) {
-        return this.fdao.get("FROM Pemasukan_Koperasi WHERE "
+        return this.fdao.get("FROM PemasukanKoperasi WHERE "
                 +category+ " LIKE '%"+data+"%'");
     }
 
    
     public PemasukanKoperasi getPemasukanById(String kdMasukKoperasi) {
         return (PemasukanKoperasi) this.fdao
-                .getById("FROM Pemasukan_Koperasi WHERE kdMasukKoperasi='" + kdMasukKoperasi + "'");
+                .getById("FROM PemasukanKoperasi WHERE kdMasukKoperasi='" + kdMasukKoperasi + "'");
     }
+      public String getKdAutoPemasukanKoeparasi(){
+            return (String) this.fdao.getById("Select CONCAT('M',LPAD((TO_NUMBER(SUBSTR(MAX(kd_masukkoperasi),2,3))+1),3, '0')) FROM PemasukanKoperasi");
+  
+    }
+    
     
 }

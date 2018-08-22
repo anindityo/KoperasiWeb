@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Tenor.findByNamaTenor", query = "SELECT t FROM Tenor t WHERE t.namaTenor = :namaTenor")})
 public class Tenor implements Serializable {
 
+    @Column(name = "JUMLAH_TENOR")
+    private Integer jumlahTenor;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -98,6 +101,14 @@ public class Tenor implements Serializable {
     @Override
     public String toString() {
         return "entitas.Tenor[ kdTenor=" + kdTenor + " ]";
+    }
+
+    public Integer getJumlahTenor() {
+        return jumlahTenor;
+    }
+
+    public void setJumlahTenor(Integer jumlahTenor) {
+        this.jumlahTenor = jumlahTenor;
     }
     
 }
