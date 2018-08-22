@@ -80,35 +80,35 @@ public class tester {
 //          System.out.println(ac.drop(del));
 //        System.out.println(BCrypt.checkpw("admin", BCrypt.hashpw("admin", BCrypt.gensalt(12))));
 //         System.out.println(BCrypt.hashpw("admin", BCrypt.gensalt(12)));
-        String kodelogin = "Admin";
-        String pass = "admin";
-        String role = "akun";
-
-        Anggota agt = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(kodelogin);
-        AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
-
-        if (role == "akun") {
-            Akun a = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(kodelogin);
-
-            if (ak.search("kd_akun", kodelogin).isEmpty() || !ak.login(kodelogin, pass)) {
-                System.out.println("gagal pass/kode akun salah ");
-            } else {
-                if (a.getKdRole().getKdRole().toString().equals("1")) {
-                    System.out.println("sukses ");
-                } else if (a.getKdRole().getKdRole().toString().equals("2")) {
-                    System.out.println("sukses 2");
-                } else {
-                    System.out.println("gagal");
-                }
-
-            }
-        } else {
-            if (agtc.search("kd_anggota", kodelogin).isEmpty() || !agtc.loginanggota(kodelogin, pass)) {
-                System.out.println("gagal pass/kode anggota salah");
-            } else {
-                System.out.println("sukses 3");
-            }
-        }
+//        String kodelogin = "Admin";
+//        String pass = "admin";
+//        String role = "akun";
+//
+//        Anggota agt = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(kodelogin);
+//        AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
+//
+//        if (role == "akun") {
+//            Akun a = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(kodelogin);
+//
+//            if (ak.search("kd_akun", kodelogin).isEmpty() || !ak.login(kodelogin, pass)) {
+//                System.out.println("gagal pass/kode akun salah ");
+//            } else {
+//                if (a.getKdRole().getKdRole().toString().equals("1")) {
+//                    System.out.println("sukses ");
+//                } else if (a.getKdRole().getKdRole().toString().equals("2")) {
+//                    System.out.println("sukses 2");
+//                } else {
+//                    System.out.println("gagal");
+//                }
+//
+//            }
+//        } else {
+//            if (agtc.search("kd_anggota", kodelogin).isEmpty() || !agtc.loginanggota(kodelogin, pass)) {
+//                System.out.println("gagal pass/kode anggota salah");
+//            } else {
+//                System.out.println("sukses 3");
+//            }
+//        }
 //
 //        if (ak.search("kd_akun", kodelogin).isEmpty() || !ak.login(kodelogin, pass)) {
 //                    System.out.println("gagal pass/kode salah");
@@ -174,7 +174,15 @@ public class tester {
         //            cs.execute();
         //  System.out.println(ap.inspinjaman("APJ007", "5000", "KRY001", "AGT003", "T1"));
         //Anggota a = agtc.getById("AGT003");
-
+//  String id="Tes";
+//  String kd="Tes";
+//  
+//  if(id.equals(kd)){
+//      System.out.println("sukses");
+//  }else{
+//      
+//      System.out.println("gagla");
+//  }
     }
 
 }

@@ -71,6 +71,13 @@ public class Akun implements Serializable {
         this.tanggallahir = tanggallahir;
     }
 
+    public Akun( String kdAkun, String telepon, Role kdRole, Date tanggallahir) {
+        this.kdAkun = kdAkun;
+        this.telepon = telepon;
+        this.kdRole = kdRole;
+         this.tanggallahir = tanggallahir;
+    }
+
     
 
         

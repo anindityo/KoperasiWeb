@@ -5,12 +5,21 @@
  */
 package servlets;
 
+import controllers.AkunController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Hibernate;
+import tools.HibernateUtil;
 
 /**
  *
@@ -29,18 +38,31 @@ public class EditAdminServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditAdminServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditAdminServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            String kode = request.getParameter("kd");
+            String telepon = request.getParameter("txttelepon");
+            String tgllahir = request.getParameter("txttgllahir");
+            String passwordbaru = request.getParameter("txtpassbaru");
+            String passwordbaru2 = request.getParameter("txtpassbaru2");
+            AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
+            DateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
+            Date tanggalL = formatTanggal.parse(tgllahir);
+            try (PrintWriter out = response.getWriter()) {
+                if (passwordbaru != null && passwordbaru2 != null) {
+                    if (passwordbaru.equals(passwordbaru2)) {
+                        ak.saveOrEdit(kode, passwordbaru, telepon, "1", tanggalL);
+                        response.sendRedirect("views/viewAdmin/home.jsp");
+                    } else {
+                        response.sendRedirect("views/viewAdmin/adminkaryawan.jsp");
+                    }
+                } else {
+                    ak.saveoreditpasskosong(kode, telepon, "2", tanggalL);
+    response.sendRedirect("views/viewAdmin/home.jsp");
+                }
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(EditAdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
