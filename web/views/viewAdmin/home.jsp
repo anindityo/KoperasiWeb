@@ -170,7 +170,7 @@
                     <div class="modal-content">
                         <form action="" method="POST">
                             <div class="modal-header text-center">
-                                <h4 class="modal-title w-100 font-weight-bold">Edit Akun</h4>
+                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -179,22 +179,27 @@
                                 <div class="md-form mb-5" >
                                     <!--<i class="fa fa-user prefix grey-text"></i>-->
                                     <!--<label data-error="wrong" data-success="right" for="orangeForm-name" type="hidden">Kode Karyawan</label>-->
-                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= Kode%> " >
+                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="" >
                                 </div>
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon"  pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" required="">
                                 </div>
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-address-book"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password</label>
-                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtpassword">
+                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtpassword" required="">
                                 </div>
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-address-book"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
-                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtconfirmpass">
+                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtconfirmpass" required="">
+                                </div>
+                                <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
+                                    <i class="date"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" max="2009-08-21">
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
@@ -204,7 +209,6 @@
                     </div>
                 </div>
             </div>
-
 
 
             <!-- Bootstrap core JavaScript-->
