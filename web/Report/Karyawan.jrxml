@@ -26,10 +26,6 @@ FROM
 	</background>
 	<title>
 		<band height="132" splitType="Stretch">
-			<image>
-				<reportElement x="456" y="0" width="99" height="132" uuid="caac0a15-593b-43e2-a43a-1a6f294514a0"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
-			</image>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="01f1c073-6680-469c-a1c2-3ad3fd0cf1e5"/>
 				<staticText>
@@ -37,14 +33,14 @@ FROM
 					<textElement>
 						<font isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry Title]]></text>
+					<text><![CDATA[Report Data]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="ac863f6f-dc6b-41fc-b61c-401dd6704509"/>
+					<reportElement style="SubTitle" x="156" y="66" width="249" height="29" uuid="ac863f6f-dc6b-41fc-b61c-401dd6704509"/>
 					<textElement>
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Cherry SubTitle]]></text>
+					<text><![CDATA[Karyawan]]></text>
 				</staticText>
 			</frame>
 			<frame>

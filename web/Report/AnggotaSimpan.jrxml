@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9dc01b0-d77a-41a7-a173-a7181e58fda4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="10"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     ANGGOTA_SIMPAN."KD_ANGGOTASIMPAN" AS ANGGOTA_SIMPAN_KD_ANGGOTASIMPA,
+     ANGGOTA_SIMPAN."KD_AKUN" AS ANGGOTA_SIMPAN_KD_AKUN,
+     ANGGOTA_SIMPAN."TGL_SIMPAN" AS ANGGOTA_SIMPAN_TGL_SIMPAN,
+     ANGGOTA_SIMPAN."NOMINAL" AS ANGGOTA_SIMPAN_NOMINAL,
+     SIMPANAN."NAMA_SIMPANAN" AS SIMPANAN_NAMA_SIMPANAN,
+     SIMPANAN."JUMLAH_SIMPANAN" AS SIMPANAN_JUMLAH_SIMPANAN,
+     ANGGOTA."NAMA_ANGGOTA" AS ANGGOTA_NAMA_ANGGOTA
+FROM
+     "KOPERASIWEB"."ANGGOTA" ANGGOTA INNER JOIN "KOPERASIWEB"."ANGGOTA_SIMPAN" ANGGOTA_SIMPAN ON ANGGOTA."KD_ANGGOTA" = ANGGOTA_SIMPAN."KD_ANGGOTA"
+     INNER JOIN "KOPERASIWEB"."SIMPANAN" SIMPANAN ON ANGGOTA_SIMPAN."KD_SIMPANAN" = SIMPANAN."KD_SIMPANAN"]]>
+	</queryString>
+	<field name="ANGGOTA_SIMPAN_KD_ANGGOTASIMPA" class="java.lang.String"/>
+	<field name="ANGGOTA_SIMPAN_KD_AKUN" class="java.lang.String"/>
+	<field name="ANGGOTA_SIMPAN_TGL_SIMPAN" class="java.sql.Timestamp"/>
+	<field name="ANGGOTA_SIMPAN_NOMINAL" class="java.math.BigDecimal"/>
+	<field name="SIMPANAN_NAMA_SIMPANAN" class="java.lang.String"/>
+	<field name="SIMPANAN_JUMLAH_SIMPANAN" class="java.math.BigDecimal"/>
+	<field name="ANGGOTA_NAMA_ANGGOTA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="270" y="0" width="300" height="62" uuid="2cb077a4-bb3f-46d7-8fe9-468fd08eeefd"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Report Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="303" y="62" width="196" height="22" uuid="a6c90cf7-b115-4595-b979-6b2c177a242b"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Anggota Simpan]]></text>
+			</staticText>
+			<image>
+				<reportElement x="633" y="-73" width="219" height="209" uuid="98e7a151-5270-4ecb-b9df-8f3c71cd44b3"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1" uuid="0b433e05-c2ef-4bae-a1ba-a24bd87d20e0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="114" height="15" forecolor="#736343" uuid="1a047330-9198-4f62-b645-74241e4054c6"/>
+				<text><![CDATA[KD ANGGOTASIMPA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="114" y="0" width="114" height="15" forecolor="#736343" uuid="cb16d3e9-246c-4fe0-ad2d-a54be2bbe051"/>
+				<text><![CDATA[KD_AKUN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="228" y="0" width="114" height="15" forecolor="#736343" uuid="ad4b5e30-e255-4b77-8720-96b98599b53e"/>
+				<text><![CDATA[TGL_SIMPAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="342" y="0" width="114" height="15" forecolor="#736343" uuid="46b6685e-4ab6-4fd8-bec9-b69928d26fa0"/>
+				<text><![CDATA[NOMINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="456" y="0" width="114" height="15" forecolor="#736343" uuid="a3ca2e64-534b-40f6-8d56-8d0aed95cf8e"/>
+				<text><![CDATA[NAMA_SIMPANAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="570" y="0" width="114" height="15" forecolor="#736343" uuid="bb7438e7-52e5-437a-96cc-9a3419b4b4d4"/>
+				<text><![CDATA[JUMLAH_SIMPANAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="684" y="0" width="114" height="15" forecolor="#736343" uuid="fc7f7d85-34fd-44b9-a771-464b7a6d43f6"/>
+				<text><![CDATA[NAMA_ANGGOTA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="2363480c-4f61-4408-8423-abdebc54fdf4"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="114" height="15" uuid="3209d2c2-182c-44cc-b930-8357b7820775"/>
+					<textFieldExpression><![CDATA[$F{ANGGOTA_SIMPAN_KD_ANGGOTASIMPA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="114" y="0" width="114" height="15" uuid="49a8e296-4ea6-43fd-885f-576b48742ad5"/>
+					<textFieldExpression><![CDATA[$F{ANGGOTA_SIMPAN_KD_AKUN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="228" y="0" width="114" height="15" uuid="c3774fd1-7dac-42e6-b7b8-aa0101d152d1"/>
+					<textFieldExpression><![CDATA[$F{ANGGOTA_SIMPAN_TGL_SIMPAN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="342" y="0" width="114" height="15" uuid="a331d230-4d7a-42b2-8723-bf237b05400b"/>
+					<textFieldExpression><![CDATA[$F{ANGGOTA_SIMPAN_NOMINAL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="456" y="0" width="114" height="15" uuid="a44d3b03-9fe9-456c-b43c-910f7aa7b057"/>
+					<textFieldExpression><![CDATA[$F{SIMPANAN_NAMA_SIMPANAN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="570" y="0" width="114" height="15" uuid="d579000b-0d18-49cc-a58f-7eae898c9c5e"/>
+					<textFieldExpression><![CDATA[$F{SIMPANAN_JUMLAH_SIMPANAN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="684" y="0" width="114" height="15" uuid="6cf2583d-54c1-405c-90de-12a11b0b04a1"/>
+					<textFieldExpression><![CDATA[$F{ANGGOTA_NAMA_ANGGOTA}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="ba1c7895-3e74-469c-92e7-1993c70a2155"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="62fc90e3-13b9-45b6-939c-b5ed0f706c3a"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="fae8689e-9ef1-48dc-a48d-889d98fbea4a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="c599a423-7a66-40f5-b3e7-6f9e28d909f0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="290f7e3e-ce65-41e9-ac29-4d6add79a5e9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
