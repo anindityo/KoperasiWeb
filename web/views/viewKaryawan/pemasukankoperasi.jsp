@@ -201,25 +201,31 @@
                             </div>
                             <div class="modal-body mx-3">
                                 <div class="md-form mb-5">
-                                    <!--                                    <i class="fa fa-user prefix grey-text"></i>
-                                                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Pemasukan Koperasi</label>-->
+<!--                                    <i class="fa fa-user prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Pemasukan Koperasi</label>-->
                                     <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodemasuk" value="<%= kdpemasukan%>">
                                 </div>
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-calendar"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Simpan</label>
-                                    <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" required="" min="2018-08-20">
-                                </div>
+                                
 
+                                <div class="md-form mb-5">
+                                    <i class="fa fa-user prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Simpanan</label>
+                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txtkdsimpanan" required="" maxlength="7" placeholder="Isikan Kode Simpanan">
+                                </div>
                                 <div class="md-form mb-5">
                                     <i class="fa fa-user prefix grey-text"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name">Nama Pemasukan</label>
                                     <input type="text" id="orangeForm-name" class="form-control validate" name="txtnamamasuk" required="" maxlength="30" placeholder="Isikan Nama Pemasukan">
                                 </div>
                                 <div class="md-form mb-5">
+                                    <i class="fa fa-calendar"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Simpan</label>
+                                    <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" required="" min="2018-08-20">
+                                </div>
+                                <div class="md-form mb-5">
                                     <i class="fa fa-calculator"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal</label>
-                                    <input type="number" id="orangeForm-name" class="form-control validate" name="txtnominal" required="" maxlength="8" placeholder="Isikan Nomianl">
+                                    <input type="number" id="orangeForm-name" class="form-control validate" name="txtnominal" required="" maxlength="8" placeholder="Isikan Nominal">
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">

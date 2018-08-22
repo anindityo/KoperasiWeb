@@ -4,6 +4,7 @@
     Author     : Gusma
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.AnggotaSimpan"%>
 <%@page import="entitas.Simpanan"%>
 <%@page import="controllers.SimpananController"%>
@@ -201,7 +202,7 @@
                                         <tr>
                                             <td><%= as.getKdAnggotasimpan()%></td>
                                             <td><% out.print(as.getKdAnggota().getNamaAnggota());%> </td>
-                                            <td><%= as.getTglSimpan()%></td>
+                                            <td><%= new SimpleDateFormat("dd-mm-yyyy").format( as.getTglSimpan())%></td>
                                             <td><%= as.getNominal()%></td>
                                             <td><% out.print(as.getKdSimpanan().getNamaSimpanan()); %></td>
                                             <% }%>
@@ -226,47 +227,39 @@
                                 <div class="modal-body mx-3">
                                     <div class="md-form mb-5">
                                         <%  String kdagsimpan = asc.getAutoIdAnggotaSimpan();%>
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Simpan</label>
-                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkodeagtsimpan" value="<%= kdagsimpan%>">
+                                        <!--                                        <i class="fa fa-user prefix grey-text"></i>
+                                                                                <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Simpan</label>-->
+                                        <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodeagtsimpan" value="<%= kdagsimpan%>">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="datepicker-decades"></i>
+                                        <i class="fa fa-calendar prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Simpan</label>
-                                        <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" >
+                                        <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" required="" min="2018-08-21">
                                     </div>
 
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <i class="fa fa-calculator prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal Simpan</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnominal">
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnominal" required="" maxlength="10" placeholder="Isikan Nominal">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-phone"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name"> Kode akun karyawan</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtakunkaryawan" value="KRY001">
+                                        <i class="fa fa-id-badge"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"> Kode Akun Karyawan</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtakunkaryawan" value="" required="" maxlength="7" placeholder="Isikan Kode Akun Karyawan">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <i class="fa fa-id-badge prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
-                                        <select  class="form-control"  name="cmbkdanggota">
-                                            <% for (Anggota anggota : ac.getAll()) {
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtakodeAnggota" value="" required="" maxlength="7" placeholder="Isikan Kode Anggota">
 
-
-                                            %>
-                                            <option value="<%= anggota.getKdAnggota()%>"><%= anggota.getKdAnggota()%></option>
-                                            <%
-                                                }
-                                            %>
-                                        </select>
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Nama Simpanan</label><br>
-                                        Simpanan Pokok  <input type="radio" id="orangeForm-name" class="form-control validate" name="txtjenissimpanan" value="S01">
-                                        Simpanan Wajib<input type="radio" id="orangeForm-name" class="form-control validate" name="txtjenissimpanan" value="S02">
+                                        <i class="fa fa-bank prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name" >Nama Simpanan</label><br>
+                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name"  name="txtjenissimpanan" value="S01" checked="checked"/> Simpanan Pokok 
+                                        <br>  
+                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name"  name="txtjenissimpanan" value="S02"/> Simpanan Wajib
                                     </div>
-
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button class="btn btn-deep-orange" type="submit">Tambah</button>

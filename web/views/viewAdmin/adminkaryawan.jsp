@@ -4,6 +4,7 @@
     Author     : Gusma
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.Akun"%>
 <%@page import="tools.HibernateUtil"%>
 <%@page import="org.hibernate.Hibernate"%>
@@ -146,7 +147,7 @@
                                                 out.print(akun.getTelepon());
                                             }
                                             %></td>
-                                        <td><%= akun.getTanggallahir()%></td>
+                                        <td><%= new SimpleDateFormat("dd-mm-yyyy").format( akun.getTanggallahir())%></td>
                                         <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Delete</a></td>
                                         <% }
                                         %>
@@ -158,6 +159,7 @@
                     </div>
                 </div>     
             </div>
+
             <!-- modal tambah-->
             <div class="modal fade" id="modaltambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -170,20 +172,20 @@
                                 </button>
                             </div>
                             <div class="modal-body mx-3">
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Karyawan</label>
-                                    <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%=karyawan%> ">
+                                <div class="md-form mb-5" >
+                                    <!--<i class="fa fa-user prefix grey-text"></i>-->
+                                    <!--<label data-error="wrong" data-success="right" for="orangeForm-name" type="hidden">Kode Karyawan</label>-->
+                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%=karyawan%> " >
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                                    <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" >
                                 </div>
-                                <div class="md-form mb-5">
+                                <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
                                     <i class="date"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl">
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-21"  >
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
@@ -194,7 +196,51 @@
                 </div>
             </div>
 
-            <!-- /modal edit-->
+           <!-- modal edit-->
+            <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="" method="POST">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+                                <div class="md-form mb-5" >
+                                    <!--<i class="fa fa-user prefix grey-text"></i>-->
+                                    <!--<label data-error="wrong" data-success="right" for="orangeForm-name" type="hidden">Kode Karyawan</label>-->
+                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="" >
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-phone"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
+                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon"  pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" required="">
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtpassword" required="">
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtconfirmpass" required="">
+                                </div>
+                                <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
+                                    <i class="date"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" max="2009-08-21">
+                                </div>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-deep-orange" type="submit">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!-- DataTables Example -->
 

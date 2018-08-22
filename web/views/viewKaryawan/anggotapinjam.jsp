@@ -4,6 +4,7 @@
     Author     : Gusma
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.Tenor"%>
 <%@page import="entitas.AnggotaPinjam"%>
 <%@page import="controllers.TenorController"%>
@@ -189,7 +190,7 @@
                                         <tr>
                                             <td><%= ap.getKdAnggotapinjam()%></td>
                                             <td><%= ap.getKdAnggota().getNamaAnggota()%> </td>
-                                            <td><%= ap.getTglPinjam()%></td>
+                                            <td><%= new SimpleDateFormat("dd-mm-yyyy").format( ap.getTglPinjam())%></td>
                                             <td><%= ap.getNominalPinjam()%></td>
                                             <td><%= ap.getKdTenor().getJumlahTenor()%> Bulan</td> 
                                             <%
@@ -206,7 +207,7 @@
                 <div class="modal fade" id="modaltambahanggotapinjam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form action="../../tambahPinjamanServlet" method="POST">
+                            <form action="../../tambahAnggotaPinjamServlet" method="POST">
                                 <div class="modal-header text-center">
                                     <h4 class="modal-title w-100 font-weight-bold">Tambah Data</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -215,37 +216,38 @@
                                 </div>
                                 <div class="modal-body mx-3">
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Pinjam</label>
-                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkodeagtpjm" value="<%= kdagtpinjam%>">
-                                    </div>
 
-                                    <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal Pinjam</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnominal">
+                                        <!--                                        <i class="fa fa-user prefix grey-text"></i>
+                                                                                <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Simpan</label>-->
+                                        <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodeagtpinjam" value="">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <i class="fa fa-calendar prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
-                                        <select  class="form-control"  name="cmbkdanggota">
-                                            <% for (Anggota anggota : ac.getAll()) {
-                                            %>
+                                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtkodeanggota" required="" maxlength="7" placeholder="Isikan Kode Anggota">
+                                    </div>
 
-                                            <option value=" <%= anggota.getKdAnggota()%>"><%= anggota.getKdAnggota()%></option>
-                                            <% }%>   
-                                        </select>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-calculator prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Akun</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtkodeakun" required="" maxlength="10" placeholder="Isikan Kode Akun">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Jangka waktu</label>
-                                        <select  class="form-control"  name="cmbjangka">
-                                            <% for (Tenor tenor : tc.getAll()) {%>
+                                        <i class="fa fa-id-badge"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"> Kode Tenor</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtkodetenor" value="" required="" maxlength="8" placeholder="Isikan Kode Tenor">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-id-badge prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Pinjam</label>
+                                        <input type="date" id="orangeForm-name" class="form-control validate" name="tglpinjam" value="" required="" min="2018-08-21" >
 
-                                            <option value="<%= tenor.getKdTenor()%>"><%= tenor.getJumlahTenor()%></option>
-                                            <% }%>  
-                                        </select>
-                                    </div>                      
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-bank prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name" >Nominal Pinjam</label><br>
+                                        <input type="number" id="orangeForm-name" class="form-control validate" name="txtnominalpinjam" value="" required="" maxlength="7" placeholder="Isikan Nominal Pinjam">
+                                    </div>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button class="btn btn-deep-orange" type="submit">Tambah</button>
@@ -253,7 +255,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div
 
                 <div class="row">
                     <div class="col-md-12">

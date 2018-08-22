@@ -3,7 +3,7 @@
     Created on : Aug 15, 2018, 8:47:05 AM
     Author     : Gusma
 --%>
-
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.Anggota"%>
 <%@page import="tools.HibernateUtil"%>
 <%@page import="controllers.AnggotaController"%>
@@ -189,7 +189,7 @@
                                                 if (anggota.getAlamat() != null) {
                                                     out.print(anggota.getAlamat());
                                                 }%></td>
-                                            <td><%= anggota.getTanggallahir()%> </td>
+                                            <td><%= new SimpleDateFormat("dd-mm-yyyy").format( anggota.getTanggallahir())%> </td>
                                             <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=" role="button">Hapus</a></td>
                                             <% }%>
                                         </tr>
@@ -211,35 +211,36 @@
                                 </div>
                                 <div class="modal-body mx-3">
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
-                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdAgt%>">
+                                        <!--<i class="fa fa-user prefix grey-text"></i>-->
+                                        <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>-->
+                                        <input  hidden="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdAgt%>">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Nama</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnama">
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name" >Nama</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnama" required="" placeholder="Isikan Nama Lengkap">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-phone"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                        <input type="number" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                                        <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="13" placeholder="Maksimal 13 Digit Angka">
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="date"></i>
+                                        <i class="fa fa-calendar prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
-                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl">
+                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-20">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Jenis Kelamin</label><br>
-                                        Laki Laki  <input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Laki-Laki">
-                                        Perempuan<input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Perempuan">
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name" >Jenis Kelamin</label></br>
+                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name" name="txtjeniskelamin" value="Laki-laki" checked="checked" />Laki-laki
+                                        <br>
+                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name" name="txtjeniskelamin" value="Perempuan"/>Perempuan 
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-address-card"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Alamat</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat">
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat" required="" placeholder="Isikan Alamat">
                                     </div>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">

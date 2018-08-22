@@ -4,6 +4,7 @@
     Author     : Gusma
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.AnggotaSimpan"%>
 <%@page import="entitas.Simpanan"%>
 <%@page import="controllers.SimpananController"%>
@@ -148,7 +149,7 @@
                     <div class="col-lg-12">
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
-                               data-target="#modaltambahanggotasimpan">Tambah </a>
+                               data-target="#modalpenarikan">Tambah </a>
                             <a class="btn btn-primary" href=""> Print</a>
                         </div>
                     
@@ -184,10 +185,10 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="modaltambahanggotasimpan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalpenarikan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form action="../../tambahAnggotaSimpanServlet" method="POST">
+                            <form action="../../tambahPenarikanServlet" method="POST">
                                 <div class="modal-header text-center">
                                     <h4 class="modal-title w-100 font-weight-bold">Tambah Data</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -199,37 +200,28 @@
 
                                         <!--                                        <i class="fa fa-user prefix grey-text"></i>
                                                                                 <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Simpan</label>-->
-                                        <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodeagtsimpan" value="">
+                                        <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodepenarikan" value="">
                                     </div>
-                                    <div class="md-form mb-5">
-                                        <i class="fa fa-calendar prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Simpan</label>
-                                        <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" required="" min="2018-08-21">
-                                    </div>
+                                    
 
-                                    <div class="md-form mb-5">
-                                        <i class="fa fa-calculator prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal Simpan</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnominal" required="" maxlength="10" placeholder="Isikan Nominal">
-                                    </div>
-                                    <div class="md-form mb-5">
-                                        <i class="fa fa-id-badge"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name"> Kode Akun Karyawan</label>
-                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtakunkaryawan" value="" required="" maxlength="7" placeholder="Isikan Kode Akun Karyawan">
-                                    </div>
-                                    <div class="md-form mb-5">
+                                    
+                                   <div class="md-form mb-5">
                                         <i class="fa fa-id-badge prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
                                         <input type="text" id="orangeForm-name" class="form-control validate" name="txtakodeAnggota" value="" required="" maxlength="7" placeholder="Isikan Kode Anggota">
 
                                     </div>
                                     <div class="md-form mb-5">
-                                        <i class="fa fa-bank prefix grey-text"></i>
-                                        <label data-error="wrong" data-success="right" for="orangeForm-name" >Nama Simpanan</label><br>
-                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name"  name="txtjenissimpanan" value="S01" checked="checked"/> Simpanan Pokok 
-                                        <br>  
-                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name"  name="txtjenissimpanan" value="S02"/> Simpanan Wajib
+                                        <i class="fa fa-calculator prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal </label>
+                                        <input type="number" id="orangeForm-name" class="form-control validate" name="txtnominal" required="" maxlength="10" placeholder="Isikan Nominal">
                                     </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-calendar prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Tanggal Penarikan</label>
+                                        <input  type="date" id="orangeForm-name" class="form-control validate" name="txttanggal" required="" min="2018-08-21">
+                                    </div>
+                                    
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
                                     <button class="btn btn-deep-orange" type="submit">Tambah</button>
