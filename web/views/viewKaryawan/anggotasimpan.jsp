@@ -49,14 +49,14 @@
     </head>
 
     <body class="animsition">
-         <%AnggotaSimpanController asc = new AnggotaSimpanController(HibernateUtil.getSessionFactory());
+        <%AnggotaSimpanController asc = new AnggotaSimpanController(HibernateUtil.getSessionFactory());
             AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
             SimpananController sc = new SimpananController(HibernateUtil.getSessionFactory());
 
 
         %>
         <div class="page-wrapper">
-          
+
 
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
@@ -73,12 +73,12 @@
                                     <i class="fas fa-home"></i>Dashboard
                                 </a>
                             </li>
-                            <li class="active has-sub">
+                            <li>
                                 <a href="anggota.jsp">
                                     <i class="fas fa-user"></i>Anggota
                                 </a>
                             </li>
-                            <li>
+                            <li  class="active has-sub">
                                 <a href="anggotasimpan.jsp">
                                     <i class="fas fa-table"></i>Anggota Simpan
                                 </a>
@@ -111,7 +111,7 @@
             <!-- END MENU SIDEBAR-->
 
             <!-- PAGE CONTAINER-->
-          
+
             <div class="page-container">
                 <!-- HEADER DESKTOP-->
                 <header class="header-desktop">
@@ -150,69 +150,67 @@
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
-
-
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-table"></i>
-                            Data Table Simpanan Anggota
+                    <div class="col-lg-12">
+                        <div class="container-login100-form-btn">
+                            <a class="btn btn-success" href="#" data-toggle="modal"
+                               data-target="#modaltambahanggotasimpan">Tambah </a>
+                            <a class="btn btn-primary" href=""> Print</a>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="container-login100-form-btn">
-                                <a class="btn btn-success" href="#" data-toggle="modal"
-                                   data-target="#modaltambahanggotasimpan">Tambah </a>
-                                <a class="btn btn-primary" href=""> Print</a>
+
+                        </br>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table"></i>
+                                Data Table Simpanan Anggota
+                            </div>
+                            <div class="card-body">
+
+
+                                <% for (Simpanan simpanan : sc.getSimpananPokok()) {
+
+
+                                %>
+                                <h5>Total Simpanan Pokok = <%= simpanan.getJumlahSimpanan()%> </h5> <br>
+                                <% } %>
+                                <% for (Simpanan simpanan : sc.getSimpananWajib()) {
+
+
+                                %>
+                                <h5>Total Simpanan Wajib = <%= simpanan.getJumlahSimpanan()%> </h5>
+                                <% } %>
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Anggota Simpan</th>
+                                            <th>Nama Anggota</th>
+                                            <th>Tanggal Simpan</th>
+                                            <th>Nominal Simpan</th>
+                                            <th>Jenis Simpanan</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+                                        <%            for (AnggotaSimpan as : asc.getAll()) {
+
+
+                                        %>
+                                        <tr>
+                                            <td><%= as.getKdAnggotasimpan()%></td>
+                                            <td><% out.print(as.getKdAnggota().getNamaAnggota());%> </td>
+                                            <td><%= as.getTglSimpan()%></td>
+                                            <td><%= as.getNominal()%></td>
+                                            <td><% out.print(as.getKdSimpanan().getNamaSimpanan()); %></td>
+                                            <% }%>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="card-body">
-
-
-                            <% for (Simpanan simpanan : sc.getSimpananPokok()) {
-
-
-                            %>
-                            <h5>Total Simpanan Pokok = <%= simpanan.getJumlahSimpanan()%> </h5> <br>
-                            <% } %>
-                            <% for (Simpanan simpanan : sc.getSimpananWajib()) {
-
-
-                            %>
-                            <h5>Total Simpanan Wajib = <%= simpanan.getJumlahSimpanan()%> </h5>
-                            <% } %>
-
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Anggota Simpan</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Tanggal Simpan</th>
-                                        <th>Nominal Simpan</th>
-                                        <th>Jenis Simpanan</th>
-
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-
-
-                                    <%            for (AnggotaSimpan as : asc.getAll()) {
-
-
-                                    %>
-                                    <tr>
-                                        <td><%= as.getKdAnggotasimpan()%></td>
-                                        <td><% out.print(as.getKdAnggota().getNamaAnggota());%> </td>
-                                        <td><%= as.getTglSimpan()%></td>
-                                        <td><%= as.getNominal()%></td>
-                                        <td><% out.print(as.getKdSimpanan().getNamaSimpanan()); %></td>
-                                        <% }%>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                        </div>
                     </div>
-
                 </div>
 
                 <div class="modal fade" id="modaltambahanggotasimpan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -279,56 +277,56 @@
                 </div>
             </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="copyright">
-                    <p>Copyright © 2018 Koperasi TIM. All rights reserved. Template by <a href="#">Koperasi TIM</a>.</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Koperasi TIM. All rights reserved. Template by <a href="#">Koperasi TIM</a>.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-<!-- END MAIN CONTENT-->
-<!-- END PAGE CONTAINER-->
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
 
 
 
 
-<!-- Jquery JS-->
-<script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
- <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+        <!-- Jquery JS-->
+        <script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
+        <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
         <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
         <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-<!-- Bootstrap JS-->
-<script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
+        <script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 
-<!-- Vendor JS       -->
-<script src="../../styleKaryawan/vendor/slick/slick.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
-<script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
-<script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
-<script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="../../styleKaryawan/vendor/select2/select2.min.js">
-</script>
+        <!-- Vendor JS       -->
+        <script src="../../styleKaryawan/vendor/slick/slick.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
+        <script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
+        <script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="../../styleKaryawan/vendor/select2/select2.min.js">
+        </script>
 
-<!-- Main JS-->
-<script src="../../styleKaryawan/js/main.js"></script>
+        <!-- Main JS-->
+        <script src="../../styleKaryawan/js/main.js"></script>
 
 
 
         <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
         <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
-</body>
+    </body>
 
 </html>
 <!-- end document-->

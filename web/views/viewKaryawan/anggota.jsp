@@ -46,7 +46,7 @@
 
     <body class="animsition">
         <div class="page-wrapper">
-          
+
 
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
@@ -113,7 +113,7 @@
                                 <div class="header-button">
                                     <div class="account-wrap">
                                         <div class="account-item clearfix js-item-menu">
-                                            <div class="content fa fa-user" style="font-size: 30px;">
+                                            <div class="content fa fa-user" style="font-size: 18px;">
                                                 <a class="js-acc-btn" href="#" style="font-size: 20px;"></a>
                                             </div>
                                             <div class="account-dropdown js-dropdown">
@@ -139,169 +139,168 @@
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
-
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="fas fa-table"></i>
-                            Data Table Anggota
-                        </div>
-                           <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
                                data-target="#modaltambahanggota">Tambah </a>
                             <a class="btn btn-primary" href=""> Print</a>
+                        </div><br>
+
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table"></i>
+                                Data Table Anggota
+                            </div>
+                            <div class="card-body">
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Anggota</th>
+                                            <th>Nama Anggota</th>
+                                            <th>Telepon</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Alamat</th>
+                                            <th>Tanggal lahir </th>
+                                            <th>Fungsi</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% AnggotaController agc = new AnggotaController(HibernateUtil.getSessionFactory());
+                                            String kdAgt = agc.getAutoIdAnggota();
+                                            for (Anggota anggota : agc.getAll()) {
+
+
+                                        %>
+                                        <tr>
+                                            <td><%= anggota.getKdAnggota()%></td>
+                                            <td> <%
+                                                if (anggota.getNamaAnggota() != null) {
+                                                    out.print(anggota.getNamaAnggota());
+                                                }
+                                                %></td>
+                                            <td><%if (anggota.getTelepon() != null) {
+                                                    out.print(anggota.getTelepon());
+                                                }
+                                                %></td>
+                                            <td><%= anggota.getJenisKelamin()%></td>
+                                            <td><%
+                                                if (anggota.getAlamat() != null) {
+                                                    out.print(anggota.getAlamat());
+                                                }%></td>
+                                            <td><%= anggota.getTanggallahir()%> </td>
+                                            <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=" role="button">Hapus</a></td>
+                                            <% }%>
+                                        </tr>
+                                    </tbody>
+                                </table>                                    
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+                <div class="modal fade" id="modaltambahanggota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="../../tambahAnggotaServlet" method="POST">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Tambah Data</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mx-3">
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
+                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdAgt%>">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Nama</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtnama">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-phone"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
+                                        <input type="number" id="orangeForm-name" class="form-control validate" name="txttelepon">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="date"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
+                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Jenis Kelamin</label><br>
+                                        Laki Laki  <input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Laki-Laki">
+                                        Perempuan<input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Perempuan">
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fa fa-address-card"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Alamat</label>
+                                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat">
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-deep-orange" type="submit">Tambah</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                        <div class="card-body">
+                </div>
 
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Anggota</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Telepon</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Alamat</th>
-                                        <th>Tanggal lahir </th>
-                                        <th>Fungsi</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <% AnggotaController agc = new AnggotaController(HibernateUtil.getSessionFactory());
-                                        String kdAgt = agc.getAutoIdAnggota();
-                                        for (Anggota anggota : agc.getAll()) {
-
-
-                                    %>
-                                    <tr>
-                                        <td><%= anggota.getKdAnggota()%></td>
-                                        <td> <%
-                                            if (anggota.getNamaAnggota() != null) {
-                                                out.print(anggota.getNamaAnggota());
-                                            }
-                                            %></td>
-                                        <td><%if (anggota.getTelepon() != null) {
-                                                out.print(anggota.getTelepon());
-                                            }
-                                            %></td>
-                                        <td><%= anggota.getJenisKelamin()%></td>
-                                        <td><%
-                                            if (anggota.getAlamat() != null) {
-                                                out.print(anggota.getAlamat());
-                                            }%></td>
-                                        <td><%= anggota.getTanggallahir() %> </td>
-                                        <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=" role="button">Hapus</a></td>
-                                        <% }%>
-                                    </tr>
-                                </tbody>
-                            </table>
-                  
-                    </div>
-                </div>     
             </div>
-            <div class="modal fade" id="modaltambahanggota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action="../../tambahAnggotaServlet" method="POST">
-                            <div class="modal-header text-center">
-                                <h4 class="modal-title w-100 font-weight-bold">Tambah Data</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body mx-3">
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
-                                    <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= kdAgt%>">
-                                </div>
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Nama</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txtnama">
-                                </div>
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-phone"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="number" id="orangeForm-name" class="form-control validate" name="txttelepon">
-                                </div>
-                                 <div class="md-form mb-5">
-                                    <i class="date"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl">
-                                </div>
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Jenis Kelamin</label><br>
-                                    Laki Laki  <input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Laki-Laki">
-                                    Perempuan<input type="radio" id="orangeForm-name" class="form-control validate" name="txtjeniskelamin" value="Perempuan">
-                                </div>
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-address-card"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Alamat</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat">
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn btn-deep-orange" type="submit">Tambah</button>
-                            </div>
-                        </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Koperasi TIM. All rights reserved. Template by <a href="#">Koperasi TIM</a>.</p>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="copyright">
-                    <p>Copyright © 2018 Koperasi TIM. All rights reserved. Template by <a href="#">Koperasi TIM</a>.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-<!-- END MAIN CONTENT-->
-<!-- END PAGE CONTAINER-->
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
 
 
 
 
-<!-- Jquery JS-->
-<script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
- <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+        <!-- Jquery JS-->
+        <script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
+        <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
         <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
         <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-<!-- Bootstrap JS-->
-<script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
+        <script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 
-<!-- Vendor JS       -->
-<script src="../../styleKaryawan/vendor/slick/slick.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
-<script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
-<script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
-</script>
-<script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
-<script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="../../styleKaryawan/vendor/select2/select2.min.js">
-</script>
+        <!-- Vendor JS       -->
+        <script src="../../styleKaryawan/vendor/slick/slick.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
+        <script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
+        <script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
+        </script>
+        <script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="../../styleKaryawan/vendor/select2/select2.min.js">
+        </script>
 
-<!-- Main JS-->
-<script src="../../styleKaryawan/js/main.js"></script>
+        <!-- Main JS-->
+        <script src="../../styleKaryawan/js/main.js"></script>
 
 
 
         <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
         <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
-</body>
+    </body>
 
 </html>
 <!-- end document-->

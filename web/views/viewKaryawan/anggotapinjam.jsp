@@ -1,17 +1,20 @@
 <%-- 
-    Document   : anggotapinjam
-    Created on : Aug 15, 2018, 9:12:56 AM
+    Document   : anggota
+    Created on : Aug 15, 2018, 8:47:05 AM
     Author     : Gusma
 --%>
 
 <%@page import="entitas.Tenor"%>
-<%@page import="controllers.TenorController"%>
-<%@page import="entitas.Anggota"%>
-<%@page import="controllers.AnggotaController"%>
 <%@page import="entitas.AnggotaPinjam"%>
-<%@page import="tools.HibernateUtil"%>
-<%@page import="org.hibernate.Hibernate"%>
+<%@page import="controllers.TenorController"%>
 <%@page import="controllers.AnggotaPinjamController"%>
+<%@page import="entitas.AnggotaSimpan"%>
+<%@page import="entitas.Simpanan"%>
+<%@page import="controllers.SimpananController"%>
+<%@page import="controllers.AnggotaSimpanController"%>
+<%@page import="entitas.Anggota"%>
+<%@page import="tools.HibernateUtil"%>
+<%@page import="controllers.AnggotaController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,62 +54,7 @@
 
     <body class="animsition">
         <div class="page-wrapper">
-            <!-- HEADER MOBILE-->
-            <!--            <header class="header-mobile d-block d-lg-none">
-                            <div class="header-mobile__bar">
-                                <div class="container-fluid">
-                                    <div class="header-mobile-inner">
-                                        <a class="logo" href="index.html">
-                                            <img src="images/icon/logo.png" alt="CoolAdmin" />
-                                        </a>
-                                        <button class="hamburger hamburger--slider" type="button">
-                                            <span class="hamburger-box">
-                                                <span class="hamburger-inner"></span>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <nav class="navbar-mobile">
-                                <div class="container-fluid">
-                                    <ul class="navbar-mobile__list list-unstyled">
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="chart.html">
-                                                <i class="fas fa-chart-bar"></i>Charts</a>
-                                        </li>
-                                        <li>
-                                            <a href="table.html">
-                                                <i class="fas fa-table"></i>Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="form.html">
-                                                <i class="far fa-check-square"></i>Forms</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fas fa-calendar-alt"></i>Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="map.html">
-                                                <i class="fas fa-map-marker-alt"></i>Maps</a>
-                                        </li>
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-copy"></i>Pages</a>
-                                        </li>
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-desktop"></i>UI Elements</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </header>-->
-            <!-- END HEADER MOBILE-->
+
 
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
@@ -161,6 +109,7 @@
             <!-- END MENU SIDEBAR-->
 
             <!-- PAGE CONTAINER-->
+
             <div class="page-container">
                 <!-- HEADER DESKTOP-->
                 <header class="header-desktop">
@@ -199,65 +148,61 @@
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
-                    <div class="card mb-3">
-                         
-                       
-                        
-                        <div class="card-header">
-                            <i class="fas fa-table"></i>
-                            Data Table Pinjaman Anggota
+                    <div class="col-lg-12">
+                        <div class="container-login100-form-btn">
+                            <a class="btn btn-success" href="#" data-toggle="modal"
+                               data-target="#modaltambahanggotapinjam">Tambah </a>
+                            <a class="btn btn-primary" href=""> Print</a>
                         </div>
-
-
-                        <% AnggotaPinjamController apc = new AnggotaPinjamController(HibernateUtil.getSessionFactory());
-                        AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
-                        TenorController tc =new TenorController(HibernateUtil.getSessionFactory());
-                        String kdagtpinjam= apc.getAutoIdAnggotaPinjam();
-                        
-                        %>
-                        <div class="card-body">
-                            <div class="col-lg-6">
-                            <div class="container-login100-form-btn">
-                                <a class="btn btn-success" href="#" data-toggle="modal"
-                                   data-target="#modaltambahanggotapinjam">Tambah </a>
-                                <a class="btn btn-primary" href=""> Print</a>
+                        <br>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table"></i>
+                                Data Table Pinjaman Anggota
                             </div>
-                        </div>
-                            
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Anggota Pinjam</th>
-                                        <th>Nama Anggota</th>
-                                        <th>Tanggal Pinjam</th>
-                                        <th>Nominal Pinjam</th>
-                                        <th>Jangka Waktu</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-  <% for (AnggotaPinjam ap : apc.getAll()) {
+
+                            <% AnggotaPinjamController apc = new AnggotaPinjamController(HibernateUtil.getSessionFactory());
+                                AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
+                                TenorController tc = new TenorController(HibernateUtil.getSessionFactory());
+                                String kdagtpinjam = apc.getAutoIdAnggotaPinjam();
+
+                            %>
+                            <div class="card-body">                              
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Anggota Pinjam</th>
+                                            <th>Nama Anggota</th>
+                                            <th>Tanggal Pinjam</th>
+                                            <th>Nominal Pinjam</th>
+                                            <th>Jangka Waktu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <% for (AnggotaPinjam ap : apc.getAll()) {
 
 
                                         %>
-                                      
-                                    <tr>
-                                        <td><%= ap.getKdAnggotapinjam()%></td>
-                                        <td><%= ap.getKdAnggota().getNamaAnggota()%> </td>
-                                        <td><%= ap.getTglPinjam()%></td>
-                                        <td><%= ap.getNominalPinjam()%></td>
-                                        <td><%= ap.getKdTenor().getJumlahTenor()%> Bulan</td> 
-                                        <%
-                                            }
-                                        %>
-                                    </tr>
-                                </tbody>
 
-                            </table>
+                                        <tr>
+                                            <td><%= ap.getKdAnggotapinjam()%></td>
+                                            <td><%= ap.getKdAnggota().getNamaAnggota()%> </td>
+                                            <td><%= ap.getTglPinjam()%></td>
+                                            <td><%= ap.getNominalPinjam()%></td>
+                                            <td><%= ap.getKdTenor().getJumlahTenor()%> Bulan</td> 
+                                            <%
+                                                }
+                                            %>
+                                        </tr>
+                                    </tbody>                              
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                                    
+
                 <div class="modal fade" id="modaltambahanggotapinjam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -272,9 +217,9 @@
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota Pinjam</label>
-                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkodeagtpjm" value="<%= kdagtpinjam %>">
+                                        <input  readonly="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkodeagtpjm" value="<%= kdagtpinjam%>">
                                     </div>
-                                    
+
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Nominal Pinjam</label>
@@ -284,23 +229,21 @@
                                         <i class="fa fa-user prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
                                         <select  class="form-control"  name="cmbkdanggota">
-                                             <% for (Anggota anggota : ac.getAll()) {
-
-
+                                            <% for (Anggota anggota : ac.getAll()) {
                                             %>
-                                         
-                                            <option value=" <%= anggota.getKdAnggota() %>"><%= anggota.getKdAnggota()  %></option>
-                                        <% }%>   
+
+                                            <option value=" <%= anggota.getKdAnggota()%>"><%= anggota.getKdAnggota()%></option>
+                                            <% }%>   
                                         </select>
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name">Jangka waktu</label>
                                         <select  class="form-control"  name="cmbjangka">
-                                            <% for(Tenor tenor : tc.getAll()){ %>
-                                            
-                                            <option value="<%= tenor.getKdTenor() %>"><%= tenor.getJumlahTenor() %></option>
-                                        <% }%>  
+                                            <% for (Tenor tenor : tc.getAll()) {%>
+
+                                            <option value="<%= tenor.getKdTenor()%>"><%= tenor.getJumlahTenor()%></option>
+                                            <% }%>  
                                         </select>
                                     </div>                      
                                 </div>
@@ -311,7 +254,7 @@
                         </div>
                     </div>
                 </div>
-                            
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="copyright">
@@ -320,43 +263,49 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
 
 
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
 
 
-        <!-- Jquery JS-->
-        <script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
-        <!-- Bootstrap JS-->
-        <script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
-        <script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-        <!-- Vendor JS       -->
-        <script src="../../styleKaryawan/vendor/slick/slick.min.js">
-        </script>
-        <script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
-        <script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
-        <script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-        </script>
-        <script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
-        <script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
-        </script>
-        <script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
-        <script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
-        <script src="../../styleKaryawan/vendor/select2/select2.min.js">
-        </script>
 
-        <!-- Main JS-->
-        <script src="../../styleKaryawan/js/main.js"></script>
 
-        <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
-        <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+            <!-- Jquery JS-->
+            <script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
+            <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+            <!-- Bootstrap JS-->
+            <script src="../../styleKaryawan/vendor/bootstrap-4.1/popper.min.js"></script>
+            <script src="../../styleKaryawan/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
+            <!-- Vendor JS       -->
+            <script src="../../styleKaryawan/vendor/slick/slick.min.js">
+            </script>
+            <script src="../../styleKaryawan/vendor/wow/wow.min.js"></script>
+            <script src="../../styleKaryawan/vendor/animsition/animsition.min.js"></script>
+            <script src="../../styleKaryawan/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+            </script>
+            <script src="../../styleKaryawan/vendor/counter-up/jquery.waypoints.min.js"></script>
+            <script src="../../styleKaryawan/vendor/counter-up/jquery.counterup.min.js">
+            </script>
+            <script src="../../styleKaryawan/vendor/circle-progress/circle-progress.min.js"></script>
+            <script src="../../styleKaryawan/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="../../styleKaryawan/vendor/chartjs/Chart.bundle.min.js"></script>
+            <script src="../../styleKaryawan/vendor/select2/select2.min.js">
+            </script>
+
+            <!-- Main JS-->
+            <script src="../../styleKaryawan/js/main.js"></script>
+
+
+
+            <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
+            <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
     </body>
 
 </html>
 <!-- end document-->
-
 
