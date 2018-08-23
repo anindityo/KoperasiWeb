@@ -117,7 +117,7 @@
                     <div class="container-login100-form-btn">
                         <a class="btn btn-success" href="" data-toggle="modal"
                            data-target="#modaltambah">Tambah </a>
-                        <a class="btn btn-primary" href=""> Print</a>
+                        <a class="btn btn-primary" href="reportKaryawan.jsp"> Print</a>
                     </div>
                     </br>
                     <!-- Area Chart Example-->
@@ -180,12 +180,12 @@
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" >
+                                    <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" pattern="^\d{13}$" maxlength="16" placeholder="Maksimal 16 Digit Angka" >
                                 </div>
                                 <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
                                     <i class="date"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-21"  >
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" min="2000-08-21"  >
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">

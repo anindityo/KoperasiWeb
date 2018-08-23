@@ -4,13 +4,17 @@
     Author     : Gusma
 --%>
 
-<%@page import="tools.HibernateUtil"%>
-<%@page import="org.hibernate.engine.jdbc.connections.spi.ConnectionProvider"%>
-<%@page import="net.sf.jasperreports.engine.JasperRunManager"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.io.File"%>
-<%@page import="tools.HibernateUtil"%>
-<%@page import="java.util.HashMap"%>
+
+<%@ page import="java.io.*"%>
+<%@ page import="tools.HibernateUtil"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="net.sf.jasperreports.engine.*"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="net.sf.jasperreports.view.JRViewer"%>
+<%@ page import="org.hibernate.engine.jdbc.connections.spi.ConnectionProvider"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,23 +24,28 @@
     </head>
     <body>
         <%
-            try {
+          try{
+             Connection conn = null;
+            conn = HibernateUtil.getSessionFactory().getSessionFactoryOptions()
+                .getServiceRegistry().getService(ConnectionProvider.class).getConnection();
+        
+            conn.createStatement().execute("alter session set "
+                + "current_schema = koperasiweb");
 
-                HashMap parameter = new HashMap();
-                String kd_akun = request.getParameter("kd_akun");
-                parameter.put("kd_akun", kd_akun);                
-                Connection connection = HibernateUtil.getSessionFactory().getSessionFactoryOptions().getServiceRegistry().getService(ConnectionProvider.class).getConnection();
-                File reportFile = new File(application.getRealPath("viewAdmin/Report/Karyawan.jasper"));
-                byte[] bytes = JasperRunManager.runReportToPdf(reportFile.getPath(), parameter, connection);
-                response.setContentType("application/pdf");
-                response.setContentLength(bytes.length);
-                ServletOutputStream outputStream = response.getOutputStream();
-                outputStream.write(bytes, 0, bytes.length);
-                outputStream.flush();
-                outputStream.close();
-            } catch (Exception e) {
-                out.println("Error :" + e.getMessage());
-            }
+            
+            File reportFile = new File(application.getRealPath("//Report//Karyawan.jasper"));//your report_name.jasper file
+//            Map parameters = new HashMap();
+            byte[] bytes = JasperRunManager.runReportToPdf(reportFile.getPath(), null, conn);
+ 
+            response.setContentType("application/pdf");
+            response.setContentLength(bytes.length);
+            ServletOutputStream outStream = response.getOutputStream();
+            outStream.write(bytes, 0, bytes.length);
+            outStream.flush();
+            outStream.close();
+            }catch (Exception exx){
+            out.print("Error"+exx.getMessage());
+        }
         %>
     </body>
 </html>

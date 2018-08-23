@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         RequestDispatcher dispatcher = null;
         String kodelogin = request.getParameter("kode");
         String pass = request.getParameter("pass");
-        String role= request.getParameter("cmblogin");
+   
         AnggotaController agtc = new AnggotaController(HibernateUtil.getSessionFactory());
         AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
       
@@ -50,11 +50,11 @@ public class LoginServlet extends HttpServlet {
 
             Anggota agt = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(kodelogin);
 
-            if (role.equals(role)) {
+ 
                 Akun a = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(kodelogin);
 
                 if (ak.search("kd_akun", kodelogin).isEmpty() || !ak.login(kodelogin, pass)) {
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("views/login.jsp");
                 } else {
                     if (a.getKdRole().getKdRole().toString().equals("1")) {
                         response.sendRedirect("views/viewAdmin/home.jsp");
@@ -63,17 +63,17 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("views/viewKaryawan/home.jsp");
                         session.setAttribute("kd", kodelogin);
                     } else {
-                        System.out.println("gagal");
+                        response.sendRedirect("views/login.jsp");
                     }
 
                 }
-            } else {
-                if (agtc.search("kd_anggota", kodelogin).isEmpty() || !agtc.loginanggota(kodelogin, pass)) {
-                    response.sendRedirect("login.jsp");
-                } else {
-                    response.sendRedirect("views/viewAnggota/home.jsp");
-                }
-            }
+//            } else {
+//                if (agtc.search("kd_anggota", kodelogin).isEmpty() || !agtc.loginanggota(kodelogin, pass)) {
+//                    response.sendRedirect("login.jsp");
+//                } else {
+//                    response.sendRedirect("views/viewAnggota/home.jsp");
+//                }
+//            }
 
         }
     }

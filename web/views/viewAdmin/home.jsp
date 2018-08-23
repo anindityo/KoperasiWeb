@@ -184,7 +184,7 @@
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon"  pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" required="">
+                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon"  maxlength="16" placeholder="Maksimal 16 Digit Angka" required="">
                                 </div>
                                 <div class="md-form mb-5" data-validate="Telepon is required">
                                     <i class="fa fa-address-book"></i>
@@ -199,7 +199,7 @@
                                 <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
                                     <i class="date"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" max="2009-08-21">
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" max="2000-08-21">
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">

@@ -223,12 +223,12 @@
                                     <div class="md-form mb-5">
                                         <i class="fa fa-phone"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                        <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="13" placeholder="Maksimal 13 Digit Angka">
+                                        <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="16" placeholder="Maksimal 13 Digit Angka">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-calendar prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
-                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-20">
+                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2000-08-20">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>

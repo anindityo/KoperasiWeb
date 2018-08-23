@@ -52,8 +52,7 @@
                             <span class="label-input100">Password</span>
                             <input class="input100" type="password" name="pass" placeholder="Enter password">
                             <span class="focus-input100"></span>
-                        </div>
-                       
+                        </div>              
                         <div class="container-login100-form-btn">         
                             <input  type="submit" value="Login" class="login100-form-btn">
                         </div>
