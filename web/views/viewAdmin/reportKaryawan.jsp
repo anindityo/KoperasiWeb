@@ -30,7 +30,7 @@
                 .getServiceRegistry().getService(ConnectionProvider.class).getConnection();
         
             conn.createStatement().execute("alter session set "
-                + "current_schema = koperasiweb");
+                + "current_schema = koperasi");
 
             
             File reportFile = new File(application.getRealPath("//Report//Karyawan.jasper"));//your report_name.jasper file

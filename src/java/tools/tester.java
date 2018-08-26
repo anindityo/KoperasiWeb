@@ -78,8 +78,8 @@ public class tester {
 //  }
 //      String del ="KRY2";
 //          System.out.println(ac.drop(del));
-//        System.out.println(BCrypt.checkpw("admin", BCrypt.hashpw("admin", BCrypt.gensalt(12))));
-//         System.out.println(BCrypt.hashpw("admin", BCrypt.gensalt(12)));
+ System.out.println(BCrypt.checkpw("karyawan", BCrypt.hashpw("karyawan", BCrypt.gensalt(12))));
+ System.out.println(BCrypt.hashpw("karyawan", BCrypt.gensalt(12)));
 //        String kodelogin = "Admin";
 //        String pass = "admin";
 //        String role = "akun";
