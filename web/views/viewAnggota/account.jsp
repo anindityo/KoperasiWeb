@@ -1,15 +1,17 @@
-<%-- 
+<%--
     Document   : account
     Created on : Aug 15, 2018, 4:25:41 PM
     Author     : Gusma
 --%>
 
+<%@page import="entitas.Anggota"%>
+<%@page import="controllers.AnggotaController"%>
+<%@page import="tools.HibernateUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,6 +35,20 @@
     </head>
 
     <body id="page-top">
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+
+            if (session.getAttribute("kdagt") == null) {
+                response.sendRedirect("../loginAnggota.jsp");
+            } else {
+
+                AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
+                String Kode = session.getAttribute("kdagt").toString();
+                Anggota anggota = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(Kode);
+
+        %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
             <a class="navbar-brand mr-1" href="index.html">Anggota Page</a>
@@ -61,7 +77,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="account.jsp" data-toggle="modal" data-target="#">Account</a>
-                        <a class="dropdown-item" href="../login.jsp" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                        <a class="dropdown-item" href="../../logoutAnggota" >Logout</a>
                     </div>
                 </li>
             </ul>
@@ -96,28 +112,28 @@
             <!-- /modal edit-->
 
             <!-- DataTables Example -->
-            <form action="#" method="POST">
+            <form action="../../editAnggotaServlet" method="POST">
 
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
                         <i class=" prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>
-                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtkode">
+
+                        <input  type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode">
                         <i class=" prefix grey-text"></i>
                         <label data-error="wrong" data-success="right" for="orangeForm-name">Nama Anggota</label>
-                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtnama">                          
+                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtnama" value="<%= anggota.getNamaAnggota()%>">
                         <i class=" prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-name">Password</label>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">Password baru</label>
                         <input  type="text" id="orangeForm-name" class="form-control validate" name="txtpassword">
+                        <label data-error="wrong" data-success="right" for="orangeForm-name">konfirmasi password baru</label>
+                        <input  type="text" id="orangeForm-name" class="form-control validate" name="txtpasswordbaru">
                         <i class=""></i>
                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                        <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon">
-                        <i class=""></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Jenis Kelamin</label>
-                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtjenisk">
+                        <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon" value="<%= anggota.getTelepon()%>">
+
                         <i class=""></i>
                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Alamat</label>
-                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat">
+                        <input type="text" id="orangeForm-name" class="form-control validate" name="txtalamat" value="<%= anggota.getAlamat()%>">
                         <br>
                         <button class="btn btn-deep-orange" type="submit">Edit</button>
                     </div>
@@ -143,23 +159,7 @@
             </a>
 
             <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <!-- Bootstrap core JavaScript-->
         <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
@@ -180,5 +180,6 @@
         <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
         <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
 
+        <% }%>
     </body>
 </html>

@@ -5,21 +5,24 @@
  */
 package servlets;
 
+import controllers.AnggotaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tools.HibernateUtil;
 
 /**
  *
  * @author iqbal yusuff
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/logoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "LoginAnggotaServlet", urlPatterns = {"/loginAnggotaServlet"})
+public class LoginAnggotaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +37,18 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        RequestDispatcher dispatcher = null;
+        String kodelogin = request.getParameter("kodeagt");
+        String pass = request.getParameter("passagt");
         try (PrintWriter out = response.getWriter()) {
-            session.removeAttribute("kd");
-            response.sendRedirect("views/login.jsp");
+            AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
+            if (ac.search("kd_anggota", kodelogin).isEmpty() || !ac.loginanggota(kodelogin, pass)) {
+                response.sendRedirect("views/loginAnggota.jsp");
+
+            } else {
+                response.sendRedirect("views/viewAnggota/home.jsp");
+                session.setAttribute("kdagt", kodelogin);
+            }
         }
     }
 

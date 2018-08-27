@@ -56,8 +56,7 @@ public class Angsuranpinjam implements Serializable {
     public Angsuranpinjam() {
     }
 
-    
-     public Angsuranpinjam(String kdAngsuran, Date tanggalAngsur, BigInteger jumlahAngsuran, String status, AnggotaPinjam kdAnggotapinjam) {
+    public Angsuranpinjam(String kdAngsuran, Date tanggalAngsur, BigInteger jumlahAngsuran, String status, AnggotaPinjam kdAnggotapinjam) {
         this.kdAngsuran = kdAngsuran;
         this.tanggalAngsur = tanggalAngsur;
         this.jumlahAngsuran = jumlahAngsuran;
@@ -67,6 +66,11 @@ public class Angsuranpinjam implements Serializable {
 
     public Angsuranpinjam(String kdAngsuran) {
         this.kdAngsuran = kdAngsuran;
+    }
+
+    public Angsuranpinjam(String kdAngsuran, AnggotaPinjam kdAnggotapinjam) {
+        this.kdAngsuran = kdAngsuran;
+        this.kdAnggotapinjam = kdAnggotapinjam;
     }
 
     public String getKdAngsuran() {
@@ -133,5 +137,5 @@ public class Angsuranpinjam implements Serializable {
     public String toString() {
         return "entitas.Angsuranpinjam[ kdAngsuran=" + kdAngsuran + " ]";
     }
-    
+
 }

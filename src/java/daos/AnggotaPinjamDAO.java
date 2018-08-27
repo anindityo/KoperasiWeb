@@ -70,9 +70,10 @@ public class AnggotaPinjamDAO {
         return flag;
 
     }
-    public String getKdAutoAnggotaPinjam(){
-            return (String) this.fdao.getById("Select CONCAT('ASP',LPAD((TO_NUMBER(SUBSTR(MAX(kd_anggotapinjam),4,3))+1),3, '0')) FROM AnggotaPinjam");
-  
+
+    public String getKdAutoAnggotaPinjam() {
+        return (String) this.fdao.getById("Select CONCAT('APJ',LPAD((TO_NUMBER(SUBSTR(MAX(kd_anggotapinjam),4,3))+1),3, '0')) FROM AnggotaPinjam");
+
     }
 
 }

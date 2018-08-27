@@ -48,7 +48,7 @@ public class TambahKaryawanServlet extends HttpServlet {
             DateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
             Date tanggalL = formatTanggal.parse(tgl);
             AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-            if (ac.saveOrEdit(id, tgl, telepon, "2", tanggalL)) {
+            if (ac.saveOrEdit(ac.getAutoIdkaryawan(), tgl, telepon, "2", tanggalL)) {
                 out.print("sukses tambah");
             } else {
                 out.print("gagal tambah");

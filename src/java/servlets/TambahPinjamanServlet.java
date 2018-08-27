@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Hibernate;
 import tools.HibernateUtil;
 
@@ -36,21 +37,23 @@ public class TambahPinjamanServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String kdmasuk = request.getParameter("txtkodeagtpjm");
+        HttpSession session = request.getSession();
+
         String nominal = request.getParameter("txtnominal");
-        String kdagt = request.getParameter("cmbkdanggota");
+        String kdagt = request.getParameter("txtkodeanggota");
         String jangka = request.getParameter("cmbjangka");
+        String akunkaryawan = session.getAttribute("kd").toString();
         try (PrintWriter out = response.getWriter()) {
             AnggotaPinjamController apc = new AnggotaPinjamController(HibernateUtil.getSessionFactory());
 
-            if (apc.inspinjaman(kdmasuk, nominal, "KRY003", kdagt, jangka)) {
-  response.sendRedirect("views/viewKaryawan/anggotapinjam.jsp");
+            if (apc.inspinjaman(apc.getAutoIdAnggotaPinjam(), nominal, akunkaryawan, kdagt, jangka)) {
+                response.sendRedirect("views/viewKaryawan/anggotapinjam.jsp");
                 out.print("sukses");
             } else {
                 response.sendRedirect("views/viewKaryawan/anggotapinjam.jsp");
                 out.print("gagal");
             }
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

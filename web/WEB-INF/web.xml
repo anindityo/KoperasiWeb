@@ -28,6 +28,18 @@
         <servlet-name>EditAdminServlet</servlet-name>
         <servlet-class>servlets.EditAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditKaryawanServlet</servlet-name>
+        <servlet-class>servlets.EditKaryawanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAnggotaServlet</servlet-name>
+        <servlet-class>servlets.EditAnggotaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AngsuranServlet</servlet-name>
+        <servlet-class>servlets.AngsuranServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TambahKaryawanServlet</servlet-name>
         <url-pattern>/tambahKaryawanServlet</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>EditAdminServlet</servlet-name>
         <url-pattern>/editAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditKaryawanServlet</servlet-name>
+        <url-pattern>/editKaryawanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAnggotaServlet</servlet-name>
+        <url-pattern>/editAnggotaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AngsuranServlet</servlet-name>
+        <url-pattern>/angsuranServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

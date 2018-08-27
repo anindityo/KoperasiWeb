@@ -51,7 +51,8 @@ public class AnggotaPinjamController {
         return this.anggotapinjamdao.getAnggotaPinjamById(kdAnggotaPinjam);
     }
 
-    public boolean inspinjaman(String kdpinjam, String nominal, String kodekaryawan, String kdanggota, String kdtenor) throws 
+    public boolean inspinjaman(String kdpinjam, String nominal, String kodekaryawan,
+            String kdanggota, String kdtenor) throws
             SQLException {
         AnggotaPinjam ap = new AnggotaPinjam(kdpinjam,
                 Integer.parseInt(nominal),
@@ -60,9 +61,9 @@ public class AnggotaPinjamController {
                 new Tenor(kdtenor));
         return this.anggotapinjamdao.insanggotapinjam(ap);
     }
-       public String getAutoIdAnggotaPinjam(){
+
+    public String getAutoIdAnggotaPinjam() {
         return this.anggotapinjamdao.getKdAutoAnggotaPinjam();
     }
-
 
 }

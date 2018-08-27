@@ -1,9 +1,11 @@
-<%-- 
+<%--
     Document   : admin
     Created on : Aug 13, 2018, 3:31:23 PM
     Author     : Gusma
 --%>
 
+<%@page import="entitas.Anggota"%>
+<%@page import="controllers.AnggotaController"%>
 <%@page import="entitas.Akun"%>
 <%@page import="tools.HibernateUtil"%>
 <%@page import="org.hibernate.Hibernate"%>
@@ -37,7 +39,18 @@
     </head>
 
     <body id="page-top">
-        <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+
+            if (session.getAttribute("kdagt") == null) {
+                response.sendRedirect("../loginAnggota.jsp");
+            } else {
+
+                AnggotaController ac = new AnggotaController(HibernateUtil.getSessionFactory());
+                String Kode = session.getAttribute("kdagt").toString();
+                Anggota anggota = (Anggota) new AnggotaController(HibernateUtil.getSessionFactory()).getById(Kode);
 
         %>
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -68,7 +81,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="account.jsp">Account</a>
-                        <a class="dropdown-item" href="../login.jsp" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                        <a class="dropdown-item" href="../../logoutAnggota" >Logout</a>
                     </div>
                 </li>
             </ul>
@@ -103,7 +116,7 @@
             <!-- /modal edit-->
 
             <!-- DataTables Example -->
-            Selamat Datang !!
+            Selamat Datang <%= anggota.getNamaAnggota()%> !!
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
@@ -123,43 +136,26 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bootstrap core JavaScript-->
-        <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
-        <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugin JavaScript-->
-        <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
-        <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
-        <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
+            <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../../styleAdmin/js/sb-admin.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Demo scripts for this page-->
-        <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
-        <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+            <!-- Page level plugin JavaScript-->
+            <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
+            <!-- Custom scripts for all pages-->
+            <script src="../../styleAdmin/js/sb-admin.min.js"></script>
+
+            <!-- Demo scripts for this page-->
+            <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
+            <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+            <% }%>
     </body>
 </html>

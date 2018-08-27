@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : admin
     Created on : Aug 13, 2018, 3:31:23 PM
     Author     : Gusma
@@ -39,11 +39,20 @@
     </head>
 
     <body id="page-top">
-        <% AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
-            Akun ak = (Akun) session.getAttribute("kd");
-            String id = session.getAttribute("kd").toString();
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
 
-            String karyawan = ac.getAutoIdkaryawan();
+            if (session.getAttribute("kd") == null) {
+                response.sendRedirect("../login.jsp");
+            } else {
+
+                AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+
+                String id = session.getAttribute("kd").toString();
+                Akun akuns = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(id);
+
         %>
 
         <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -73,8 +82,8 @@
                         <i class="fas fa-user-circle fa-fw" style="font-size: 28px;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#.jsp" data-toggle="modal" data-target="#">Account</a>
-                        <a class="btn btn-primary" href="../../logoutServlet">Logout</a>    </div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modaledit">Account</a>
+                        <a class="dropdown-item" href="../../logoutServlet">Logout</a>    </div>
                 </li>
             </ul>
 
@@ -117,7 +126,9 @@
                     <div class="container-login100-form-btn">
                         <a class="btn btn-success" href="" data-toggle="modal"
                            data-target="#modaltambah">Tambah </a>
-                        <a class="btn btn-primary" href="reportKaryawan.jsp"> Print</a>
+                        <a class="btn btn-success" href="reportKaryawan.jsp" >Print </a>
+
+
                     </div>
                     </br>
                     <!-- Area Chart Example-->
@@ -134,7 +145,7 @@
                                         <th>Kode Akun</th>
                                         <th>Telepon</th>
                                         <th>Tanggal lahir</th>
-                                        <th>Fungsi</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,20 +158,85 @@
                                                 out.print(akun.getTelepon());
                                             }
                                             %></td>
-                                        <td><%= new SimpleDateFormat("dd-mm-yyyy").format( akun.getTanggallahir())%></td>
-                                        <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=<%= akun.getKdAkun()%>" role="button">Delete</a></td>
+                                        <td><%= new SimpleDateFormat("dd-MM-yyyy").format(akun.getTanggallahir())%></td>
                                         <% }
                                         %>
                                     </tr>
-                                </tbody> 
+                                </tbody>
                             </table>
 
                         </div>
                     </div>
-                </div>     
+                </div>
             </div>
 
-            <!-- modal tambah-->
+            <!-- modal edit-->
+
+            <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="../../editAdminServlet" method="POST">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password Baru</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru" >
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru1" >
+                                </div>
+
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-deep-orange" type="submit">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- modal edit-->
+
+            <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="../../editAdminServlet" method="POST">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password Baru</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru" >
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru1" >
+                                </div>
+
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-deep-orange" type="submit">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal tambah -->
             <div class="modal fade" id="modaltambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -172,21 +248,24 @@
                                 </button>
                             </div>
                             <div class="modal-body mx-3">
-                                <div class="md-form mb-5" >
+                                <div class="md-form mb-5">
                                     <!--<i class="fa fa-user prefix grey-text"></i>-->
-                                    <!--<label data-error="wrong" data-success="right" for="orangeForm-name" type="hidden">Kode Karyawan</label>-->
-                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%=karyawan%> " >
+                                    <!--<label data-error="wrong" data-success="right" for="orangeForm-name">Kode Anggota</label>-->
+                                    <input  hidden="true" type="text" id="orangeForm-name" class="form-control validate" name="txtkode" value="<%= ac.getAutoIdkaryawan()%>">
                                 </div>
-                                <div class="md-form mb-5" data-validate="Telepon is required">
+
+                                <div class="md-form mb-5">
                                     <i class="fa fa-phone"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" pattern="^\d{13}$" maxlength="16" placeholder="Maksimal 16 Digit Angka" >
+                                    <input type="number" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="13" placeholder="Maksimal 13 Digit Angka">
                                 </div>
-                                <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
-                                    <i class="date"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" min="2000-08-21"  >
+                                <div class="md-form mb-5">
+                                    <i class="fa fa-calendar prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
+                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-20">
                                 </div>
+
+
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
                                 <button class="btn btn-deep-orange" type="submit">Tambah</button>
@@ -195,53 +274,6 @@
                     </div>
                 </div>
             </div>
-
-           <!-- modal edit-->
-            <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action="" method="POST">
-                            <div class="modal-header text-center">
-                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body mx-3">
-                                <div class="md-form mb-5" >
-                                    <!--<i class="fa fa-user prefix grey-text"></i>-->
-                                    <!--<label data-error="wrong" data-success="right" for="orangeForm-name" type="hidden">Kode Karyawan</label>-->
-                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkode" value="" >
-                                </div>
-                                <div class="md-form mb-5" data-validate="Telepon is required">
-                                    <i class="fa fa-phone"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txttelepon"  pattern="^\d{13}$" placeholder="Maksimal 13 Digit Angka" required="">
-                                </div>
-                                <div class="md-form mb-5" data-validate="Telepon is required">
-                                    <i class="fa fa-address-book"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password</label>
-                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtpassword" required="">
-                                </div>
-                                <div class="md-form mb-5" data-validate="Telepon is required">
-                                    <i class="fa fa-address-book"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
-                                    <input type="password" id="orangeForm-name" class="form-control validate" name="txtconfirmpass" required="">
-                                </div>
-                                <div class="md-form mb-5" data-validate="Tanggal Lahir is required">
-                                    <i class="date"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal Lahir</label>
-                                    <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" max="2009-08-21">
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <button class="btn btn-deep-orange" type="submit">Edit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
             <!-- DataTables Example -->
 
             <!-- /.container-fluid -->
@@ -263,44 +295,25 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bootstrap core JavaScript-->
-        <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
-        <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="../../styleAdmin/vendor/jquery/jquery.min.js"></script>
+            <script src="../../styleAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="../../styleAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugin JavaScript-->
-        <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
-        <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
-        <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
+            <!-- Page level plugin JavaScript-->
+            <script src="../../styleAdmin/vendor/chart.js/Chart.min.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="../../styleAdmin/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../../styleAdmin/js/sb-admin.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="../../styleAdmin/js/sb-admin.min.js"></script>
 
-        <!-- Demo scripts for this page-->
-        <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
-        <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+            <!-- Demo scripts for this page-->
+            <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
+            <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
 
-
+            <% }%>
     </body>
 </html>

@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author iqbal yusuff
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/logoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "LogoutAnggota", urlPatterns = {"/logoutAnggota"})
+public class LogoutAnggota extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,8 +35,9 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            session.removeAttribute("kd");
-            response.sendRedirect("views/login.jsp");
+            session.removeAttribute("kdagt");
+            response.sendRedirect("views/loginAnggota.jsp");
+
         }
     }
 

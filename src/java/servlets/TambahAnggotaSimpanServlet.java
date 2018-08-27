@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Hibernate;
 import tools.HibernateUtil;
 
@@ -39,28 +40,29 @@ public class TambahAnggotaSimpanServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String kdagtsimpan = request.getParameter("txtkodeagtsimpan");
+        HttpSession session = request.getSession();
         String tanggal = request.getParameter("txttanggal");
-        String kdanggota = request.getParameter("cmbkdanggota");
+        String kdanggota = request.getParameter("txtkodeAnggota");
         String nominal = request.getParameter("txtnominal");
-        String akunkaryawan = request.getParameter("txtakunkaryawan");
+        String akunkaryawan = session.getAttribute("kd").toString();
         String kdsimpanan = request.getParameter("txtjenissimpanan");
         try (PrintWriter out = response.getWriter()) {
-         AnggotaSimpanController asc = new AnggotaSimpanController(HibernateUtil.getSessionFactory());
-         DateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
+            AnggotaSimpanController asc = new AnggotaSimpanController(HibernateUtil.getSessionFactory());
+            DateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
             Date tanggalL = formatTanggal.parse(tanggal);
-         if(asc.saveOrEdit(kdagtsimpan, tanggalL, nominal, akunkaryawan, kdanggota, kdsimpanan)){
-             out.print("sukses");
+            if (asc.saveOrEdit(asc.getAutoIdAnggotaSimpan(), tanggalL, nominal, akunkaryawan, kdanggota, kdsimpanan)) {
+                out.print("sukses");
                 response.sendRedirect("views/viewKaryawan/anggotasimpan.jsp");
-         }else{
-             out.print("gagal");
-             response.sendRedirect("views/viewKaryawan/anggotasimpan.jsp");
-         }
+            } else {
+                out.print("gagal");
+                response.sendRedirect("views/viewKaryawan/anggotasimpan.jsp");
+
+            }
 
         } catch (ParseException ex) {
             Logger.getLogger(TambahAnggotaSimpanServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

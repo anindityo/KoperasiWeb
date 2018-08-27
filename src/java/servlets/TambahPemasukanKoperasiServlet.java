@@ -38,7 +38,7 @@ public class TambahPemasukanKoperasiServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
              response.setContentType("text/html;charset=UTF-8");
-        String kdmasuk=request.getParameter("txtkodemasuk");
+
         String tgl = request.getParameter("txttanggal");
         String nmpemasukan = request.getParameter("txtnamamasuk");
         String nom = request.getParameter("txtnominal");
@@ -46,7 +46,7 @@ public class TambahPemasukanKoperasiServlet extends HttpServlet {
           PemasukanKoperasiController pkc = new PemasukanKoperasiController(HibernateUtil.getSessionFactory());
           DateFormat formatTanggal = new SimpleDateFormat("yyyy-mm-dd");
             Date tanggalL = formatTanggal.parse(tgl);
-          if(pkc.saveOrEdit(kdmasuk, nmpemasukan, tanggalL, nom, "S02")){
+          if(pkc.saveOrEdit(pkc.getAutoIdPemasukanKoperasi(), nmpemasukan, tanggalL, nom, "S02")){
               out.print("sukses");
               response.sendRedirect("views/viewKaryawan/pemasukankoperasi.jsp");
           }else{

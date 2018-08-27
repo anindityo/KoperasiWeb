@@ -1,9 +1,12 @@
-<%-- 
+<%--
     Document   : homeKaryawan
     Created on : Aug 15, 2018, 8:12:34 AM
     Author     : Gusma
 --%>
 
+<%@page import="entitas.Akun"%>
+<%@page import="controllers.AkunController"%>
+<%@page import="tools.HibernateUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,69 +46,26 @@
     </head>
 
     <body class="animsition">
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+
+            if (session.getAttribute("kd") == null) {
+                response.sendRedirect("../login.jsp");
+            } else {
+                AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+                String Kode = session.getAttribute("kd").toString();
+                Akun akun = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(Kode);
+
+        %>
         <div class="page-wrapper">
-            <!-- HEADER MOBILE-->
-            <!--            <header class="header-mobile d-block d-lg-none">
-                            <div class="header-mobile__bar">
-                                <div class="container-fluid">
-                                    <div class="header-mobile-inner">
-                                        <a class="logo" href="index.html">
-                                            <img src="images/icon/logo.png" alt="CoolAdmin" />
-                                        </a>
-                                        <button class="hamburger hamburger--slider" type="button">
-                                            <span class="hamburger-box">
-                                                <span class="hamburger-inner"></span>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <nav class="navbar-mobile">
-                                <div class="container-fluid">
-                                    <ul class="navbar-mobile__list list-unstyled">
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="chart.html">
-                                                <i class="fas fa-chart-bar"></i>Charts</a>
-                                        </li>
-                                        <li>
-                                            <a href="table.html">
-                                                <i class="fas fa-table"></i>Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="form.html">
-                                                <i class="far fa-check-square"></i>Forms</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fas fa-calendar-alt"></i>Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="map.html">
-                                                <i class="fas fa-map-marker-alt"></i>Maps</a>
-                                        </li>
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-copy"></i>Pages</a>
-                                        </li>
-                                        <li class="has-sub">
-                                            <a class="js-arrow" href="#">
-                                                <i class="fas fa-desktop"></i>UI Elements</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </header>-->
-            <!-- END HEADER MOBILE-->
 
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
                     <a href="#" style="font-size: 18px; color: #000000">
-                        Koperasi Simpan Pinjam 
+                        Koperasi Simpan Pinjam
                     </a>
                 </div>
                 <div class="menu-sidebar__content js-scrollbar1">
@@ -123,7 +83,7 @@
                             </li>
                             <li>
                                 <a href="anggotasimpan.jsp">
-                                 <i class="fas fa-table"></i>Anggota Simpan
+                                    <i class="fas fa-table"></i>Anggota Simpan
                                 </a>
                             </li>
                             <li>
@@ -141,7 +101,7 @@
                                     <i class="fas fa-book"></i>Penarikan
                                 </a>
                             </li>
-               
+
                             <li>
                                 <a href="pemasukankoperasi.jsp">
                                     <i class="fas fa-book"></i>Pemasukan Koperasi
@@ -160,29 +120,19 @@
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
                             <div class="header-wrap">
-                                <form class="form-header" action="" method="POST">
+                                <form class="form-header" >
 
                                 </form>
                                 <div class="header-button">
-                                    <div class="account-wrap">
-                                        <div class="account-item clearfix js-item-menu">
-                                            <div class="content fa fa-user" style="font-size: 27px;">
-                                                <a class="js-acc-btn" href="#" style="font-size: 20px;"></a>
-                                            </div>
-                                            <div class="account-dropdown js-dropdown">
-                                                <div class="account-dropdown__body">
-                                                    <div class="account-dropdown__item">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-account"></i>Account</a>
-                                                    </div>
-                                                    <div class="account-dropdown__footer">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-power"></i>Logout</a>
-                                                    </div>
-                                                </div>                                              
-                                            </div>
-                                        </div>
+
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-user-circle fa-fw"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modaledit">Account</a>
+                                        <a class="dropdown-item" href="../../logoutServlet" >Logout</a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -192,10 +142,19 @@
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
+                    <div id="content-wrapper">
+                        <div class="section__content section__content--p30">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="container-fluid">
+                                <div class="isi">
 
-                    <div class="section__content section__content--p30">    
-                    </div>
-                    <div class="col-lg-6">
+                                    <p>Selamat datang <%= akun.getKdAkun()%>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -208,12 +167,41 @@
             </div>
         </div>
 
-        <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
 
+        <!-- Modal edit akun-->
+        <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="../../editKaryawanServlet" method="POST">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
 
+                            <div class="md-form mb-5" data-validate="Telepon is required">
+                                <i class="fa fa-address-book"></i>
+                                <input type="hidden" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtkode"  value="<%= akun.getKdAkun()%>">
+                                <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password Baru</label>
+                                <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru" >
+                            </div>
+                            <div class="md-form mb-5" data-validate="Telepon is required">
+                                <i class="fa fa-address-book"></i>
+                                <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru1" >
+                            </div>
 
-
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-deep-orange" type="submit">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end Modal edit akun-->
         <!-- Jquery JS-->
         <script src="../../styleKaryawan/vendor/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap JS-->
@@ -237,7 +225,7 @@
 
         <!-- Main JS-->
         <script src="../../styleKaryawan/js/main.js"></script>
-
+        <% }%>
     </body>
 
 </html>

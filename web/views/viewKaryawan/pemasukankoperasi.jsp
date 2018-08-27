@@ -1,9 +1,11 @@
-<%-- 
+<%--
     Document   : pemasukankoperasi
     Created on : Aug 15, 2018, 8:47:05 AM
     Author     : Gusma
 --%>
 
+<%@page import="entitas.Akun"%>
+<%@page import="controllers.AkunController"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.PemasukanKoperasi"%>
 <%@page import="controllers.PemasukanKoperasiController"%>
@@ -52,8 +54,14 @@
     </head>
 
     <body class="animsition">
-        <% PemasukanKoperasiController pc = new PemasukanKoperasiController(HibernateUtil.getSessionFactory());
+        <%
+
+            PemasukanKoperasiController pc = new PemasukanKoperasiController(HibernateUtil.getSessionFactory());
             String kdpemasukan = pc.getAutoIdPemasukanKoperasi();
+            AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+            String Kode = session.getAttribute("kd").toString();
+            Akun akun = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(Kode);
+
 
         %>
         <div class="page-wrapper">
@@ -63,7 +71,7 @@
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
                     <a href="#" style="font-size: 18px; color: #000000">
-                        Koperasi Simpan Pinjam 
+                        Koperasi Simpan Pinjam
                     </a>
                 </div>
                 <div class="menu-sidebar__content js-scrollbar1">
@@ -122,24 +130,12 @@
 
                                 </form>
                                 <div class="header-button">
-                                    <div class="account-wrap">
-                                        <div class="account-item clearfix js-item-menu">
-                                            <div class="content fa fa-user" style="font-size: 18px;">
-                                                <a class="js-acc-btn" href="#" style="font-size: 20px;"></a>
-                                            </div>
-                                            <div class="account-dropdown js-dropdown">
-                                                <div class="account-dropdown__body">
-                                                    <div class="account-dropdown__item">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-account"></i>Account</a>
-                                                    </div>
-                                                    <div class="account-dropdown__footer">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-power"></i>Logout</a>
-                                                    </div>
-                                                </div>                                              
-                                            </div>
-                                        </div>
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-user-circle fa-fw"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modaledit">Account</a>
+                                        <a class="dropdown-item" href="../../logoutServlet" >Logout</a>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +150,7 @@
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
                                data-target="#modalpemasukankoperasi">Tambah </a>
-                            <a class="btn btn-primary" href="reportPemasukanKoperasi.jsp"> Print</a>
+
                         </div>
                     </div>
                     <br>
@@ -189,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal pemasukan -->
             <div class="modal fade" id="modalpemasukankoperasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -200,18 +197,8 @@
                                 </button>
                             </div>
                             <div class="modal-body mx-3">
-                                <div class="md-form mb-5">
-<!--                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Pemasukan Koperasi</label>-->
-                                    <input  readonly="true" type="hidden" id="orangeForm-name" class="form-control validate" name="txtkodemasuk" value="<%= kdpemasukan%>">
-                                </div>
-                                
 
-                                <div class="md-form mb-5">
-                                    <i class="fa fa-user prefix grey-text"></i>
-                                    <label data-error="wrong" data-success="right" for="orangeForm-name">Kode Simpanan</label>
-                                    <input type="text" id="orangeForm-name" class="form-control validate" name="txtkdsimpanan" required="" maxlength="7" placeholder="Isikan Kode Simpanan">
-                                </div>
+
                                 <div class="md-form mb-5">
                                     <i class="fa fa-user prefix grey-text"></i>
                                     <label data-error="wrong" data-success="right" for="orangeForm-name">Nama Pemasukan</label>
@@ -235,7 +222,40 @@
                     </div>
                 </div>
             </div>
-        </div> 
+            <!-- Modal edit akun-->
+            <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="../../editKaryawanServlet" method="POST">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <input type="hidden" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtkode"  value="<%= akun.getKdAkun()%>">
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password Baru</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru" >
+                                </div>
+                                <div class="md-form mb-5" data-validate="Telepon is required">
+                                    <i class="fa fa-address-book"></i>
+                                    <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                    <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru1" >
+                                </div>
+
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-deep-orange" type="submit">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="copyright">
@@ -285,8 +305,7 @@
 
     <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
     <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
-</body>
 
+</body>
 </html>
-<!-- end document-->
 

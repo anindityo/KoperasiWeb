@@ -1,8 +1,10 @@
-<%-- 
+<%--
     Document   : anggota
     Created on : Aug 15, 2018, 8:47:05 AM
     Author     : Gusma
 --%>
+<%@page import="entitas.Akun"%>
+<%@page import="controllers.AkunController"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entitas.Anggota"%>
 <%@page import="tools.HibernateUtil"%>
@@ -45,6 +47,19 @@
     </head>
 
     <body class="animsition">
+        <%
+            response.setHeader("Cache-Control", "no-cache");
+            response.setHeader("Cache-Control", "no-store");
+            response.setHeader("Pragma", "no-cache");
+
+            if (session.getAttribute("kd") == null) {
+                response.sendRedirect("../login.jsp");
+            } else {
+                AkunController ac = new AkunController(HibernateUtil.getSessionFactory());
+                String Kode = session.getAttribute("kd").toString();
+                Akun akun = (Akun) new AkunController(HibernateUtil.getSessionFactory()).getById(Kode);
+
+        %>
         <div class="page-wrapper">
 
 
@@ -52,7 +67,7 @@
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
                     <a href="#" style="font-size: 18px; color: #000000">
-                        Koperasi Simpan Pinjam 
+                        Koperasi Simpan Pinjam
                     </a>
                 </div>
                 <div class="menu-sidebar__content js-scrollbar1">
@@ -111,25 +126,15 @@
 
                                 </form>
                                 <div class="header-button">
-                                    <div class="account-wrap">
-                                        <div class="account-item clearfix js-item-menu">
-                                            <div class="content fa fa-user" style="font-size: 18px;">
-                                                <a class="js-acc-btn" href="#" style="font-size: 20px;"></a>
-                                            </div>
-                                            <div class="account-dropdown js-dropdown">
-                                                <div class="account-dropdown__body">
-                                                    <div class="account-dropdown__item">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-account"></i>Account</a>
-                                                    </div>
-                                                    <div class="account-dropdown__footer">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-power"></i>Logout</a>
-                                                    </div>
-                                                </div>                                              
-                                            </div>
-                                        </div>
+
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-user-circle fa-fw"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modaledit">Account</a>
+                                        <a class="dropdown-item" href="../../logoutServlet" >Logout</a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -143,7 +148,7 @@
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
                                data-target="#modaltambahanggota">Tambah </a>
-                            <a class="btn btn-primary" href="reportAnggota.jsp"> Print</a>
+
                         </div><br>
 
                         <div class="card mb-3">
@@ -162,7 +167,7 @@
                                             <th>Jenis Kelamin</th>
                                             <th>Alamat</th>
                                             <th>Tanggal lahir </th>
-                                            <th>Fungsi</th>
+
                                         </tr>
                                     </thead>
 
@@ -189,16 +194,16 @@
                                                 if (anggota.getAlamat() != null) {
                                                     out.print(anggota.getAlamat());
                                                 }%></td>
-                                            <td><%= new SimpleDateFormat("dd-mm-yyyy").format( anggota.getTanggallahir())%> </td>
-                                            <td><a class="btn btn-primary" href="../../editIdKaryawanServlet?id=" role="button">Hapus</a></td>
+                                            <td><%= new SimpleDateFormat("dd-mm-yyyy").format(anggota.getTanggallahir())%> </td>
                                             <% }%>
                                         </tr>
                                     </tbody>
-                                </table>                                    
+                                </table>
                             </div>
                         </div>
-                    </div>     
+                    </div>
                 </div>
+                <!-- Modal tambah data-->
                 <div class="modal fade" id="modaltambahanggota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -223,19 +228,19 @@
                                     <div class="md-form mb-5">
                                         <i class="fa fa-phone"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Telepon</label>
-                                        <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="16" placeholder="Maksimal 13 Digit Angka">
+                                        <input type="tel" id="orangeForm-name" class="form-control validate" name="txttelepon" required="" maxlength="13" placeholder="Maksimal 13 Digit Angka">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-calendar prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name"  >Tanggal lahir</label>
-                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2000-08-20">
+                                        <input type="date" id="orangeForm-name" class="form-control validate" name="txttgl" required="" max="2009-08-20">
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-user prefix grey-text"></i>
                                         <label data-error="wrong" data-success="right" for="orangeForm-name" >Jenis Kelamin</label></br>
                                         &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name" name="txtjeniskelamin" value="Laki-laki" checked="checked" />Laki-laki
                                         <br>
-                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name" name="txtjeniskelamin" value="Perempuan"/>Perempuan 
+                                        &nbsp; &nbsp; &nbsp; <input type="radio" id="orangeForm-name" name="txtjeniskelamin" value="Perempuan"/>Perempuan
                                     </div>
                                     <div class="md-form mb-5">
                                         <i class="fa fa-address-card"></i>
@@ -250,7 +255,40 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal Edit akun -->
 
+                <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="../../editKaryawanServlet" method="POST">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Edit Data</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mx-3">
+
+                                    <div class="md-form mb-5" data-validate="Telepon is required">
+                                        <i class="fa fa-address-book"></i>
+                                        <input type="hidden" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtkode"  value="<%= akun.getKdAkun()%>">
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Password Baru</label>
+                                        <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru" >
+                                    </div>
+                                    <div class="md-form mb-5" data-validate="Telepon is required">
+                                        <i class="fa fa-address-book"></i>
+                                        <label data-error="wrong" data-success="right" for="orangeForm-name"  >Confirm Password</label>
+                                        <input type="password" id="orangeForm-name" class="form-control validate" maxlength="14" name="txtpassbaru1" >
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-deep-orange" type="submit">Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -301,6 +339,7 @@
 
         <script src="../../styleAdmin/js/demo/datatables-demo.js"></script>
         <script src="../../styleAdmin/js/demo/chart-area-demo.js"></script>
+        <% }%>
     </body>
 
 </html>

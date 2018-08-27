@@ -5,21 +5,21 @@
  */
 package servlets;
 
+import controllers.AkunController;
+import entitas.Akun;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import tools.HibernateUtil;
 
 /**
  *
  * @author iqbal yusuff
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/logoutServlet"})
-public class LogoutServlet extends HttpServlet {
+public class EditKaryawanServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,10 +33,20 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+        String kode = request.getParameter("txtkode");
+        String passwordbaru = request.getParameter("txtpassbaru");
+        String passwordbaru2 = request.getParameter("txtpassbaru1");
+        AkunController ak = new AkunController(HibernateUtil.getSessionFactory());
+        Akun akun = ak.getById(kode);
         try (PrintWriter out = response.getWriter()) {
-            session.removeAttribute("kd");
-            response.sendRedirect("views/login.jsp");
+            if (passwordbaru.equals(passwordbaru2)) {
+                ak.saveOrEdit(kode, passwordbaru, akun.getTelepon(), "2", akun.getTanggallahir());
+                response.sendRedirect("views/viewKaryawan/home.jsp");
+            } else {
+                response.sendRedirect("views/viewKaryawan/home.jsp");
+                //
+            }
+
         }
     }
 
