@@ -2,7 +2,42 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5d4d2fd-24b7-44b8-9b29-7d0764fd0ca5">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="19"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="45fc5a90-5bc1-4c40-a4c9-a58dc8d8ca75">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     AKUN."KD_AKUN" AS AKUN_KD_AKUN,
+     AKUN."TELEPON" AS AKUN_TELEPON,
+     AKUN."TANGGALLAHIR" AS AKUN_TANGGALLAHIR,
+     ROLE."NAMA_ROLE" AS ROLE_NAMA_ROLE
+FROM
+     "KOPERASI"."ROLE" ROLE INNER JOIN "KOPERASI"."AKUN" AKUN ON ROLE."KD_ROLE" = AKUN."KD_ROLE"]]>
+		</queryString>
+		<field name="AKUN_KD_AKUN" class="java.lang.String"/>
+		<field name="AKUN_TELEPON" class="java.lang.String"/>
+		<field name="AKUN_TANGGALLAHIR" class="java.sql.Timestamp"/>
+		<field name="ROLE_NAMA_ROLE" class="java.lang.String"/>
+	</subDataset>
 	<queryString>
 		<![CDATA[SELECT
      AKUN."KD_AKUN" AS AKUN_KD_AKUN,
@@ -28,42 +63,52 @@ FROM
 				</textElement>
 				<text><![CDATA[Laporan Data Role]]></text>
 			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="59" width="100" height="20" uuid="5524fc34-f579-41f6-8c8f-8dedbc1d7ce6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="47" splitType="Stretch">
 			<textField>
-				<reportElement x="32" y="0" width="100" height="20" uuid="64e84ce6-3278-4ce4-959e-1d52f33f2fe1"/>
+				<reportElement x="32" y="0" width="100" height="16" uuid="64e84ce6-3278-4ce4-959e-1d52f33f2fe1"/>
 				<textElement markup="none">
 					<font fontName="Serif"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Kode Akun"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="232" y="0" width="100" height="20" uuid="43bd0e6a-3298-4902-b32e-456f292b76c1"/>
+				<reportElement x="232" y="0" width="100" height="16" uuid="43bd0e6a-3298-4902-b32e-456f292b76c1"/>
 				<textElement markup="none">
 					<font fontName="Serif"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Telepon"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="332" y="0" width="100" height="20" uuid="5e1d69c5-dcda-46de-97bf-a6608a0e556b"/>
+				<reportElement x="332" y="0" width="74" height="16" uuid="5e1d69c5-dcda-46de-97bf-a6608a0e556b"/>
 				<textElement markup="none">
 					<font fontName="Serif"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Tanggal Lahir"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="132" y="0" width="100" height="20" uuid="06a1d0f5-6310-478e-8278-42f52c2f5278"/>
+				<reportElement x="132" y="0" width="100" height="16" uuid="06a1d0f5-6310-478e-8278-42f52c2f5278"/>
 				<textElement markup="none">
 					<font fontName="Serif"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Nama Role"]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="32" y="16" width="374" height="1" uuid="990f2cdd-1dd7-4027-ad17-f99742b7b21d"/>
+			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
 			<textField>
 				<reportElement x="32" y="0" width="100" height="20" uuid="859acdf9-5d91-43f4-bc50-56034b5dda19"/>
 				<textFieldExpression><![CDATA[$F{AKUN_KD_AKUN}]]></textFieldExpression>
@@ -73,7 +118,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{ROLE_NAMA_ROLE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="232" y="0" width="100" height="20" uuid="639b6a09-32d1-4741-a59d-96441a233c3a"/>
+				<reportElement x="231" y="0" width="100" height="20" uuid="639b6a09-32d1-4741-a59d-96441a233c3a"/>
 				<textFieldExpression><![CDATA[$F{AKUN_TELEPON}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -81,12 +126,9 @@ FROM
 				<textFieldExpression><![CDATA[$F{AKUN_TANGGALLAHIR}]]></textFieldExpression>
 			</textField>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="125" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="72" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>

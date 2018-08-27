@@ -150,7 +150,7 @@
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
                                data-target="#modalpenarikan">Tambah </a>
-                            <a class="btn btn-primary" href=""> Print</a>
+                            <a class="btn btn-primary" href="reportPenarikan.jsp"> Print</a>
                         </div>
                     
                     <br>

@@ -153,7 +153,7 @@
                         <div class="container-login100-form-btn">
                             <a class="btn btn-success" href="#" data-toggle="modal"
                                data-target="#modaltambahanggotapinjam">Tambah </a>
-                            <a class="btn btn-primary" href=""> Print</a>
+                            <a class="btn btn-primary" href="reportAnggotaPinjam.jsp"> Print</a>
                         </div>
                         <br>
                         <div class="card mb-3">
